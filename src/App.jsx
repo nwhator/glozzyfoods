@@ -4,7 +4,6 @@ import { StoreProvider } from "./context/StoreContext";
 import { AuthProvider, useAuth } from "./context/AuthContext";
 
 // Styles
-import "./assets/vendor/bootstrap-select/dist/css/bootstrap-select.min.css";
 import "./assets/css/style.css";
 import "./assets/css/glozzy-custom.css";
 
