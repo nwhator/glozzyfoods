@@ -1,25 +1,56 @@
 /* ==========================================================================
-   GlozzyFoods ND More — Dark Premium Food Delivery Design System
-   Inspired by: Uploaded UI Kit + Uber Eats + Chowdeck
-   
+   GlozzyFoods ND More — Chowdeck / Uber Eats Inspired Design System
+   DEFAULT THEME: Light Mode (Clean, Crisp, Modern)
+   TOGGLABLE: Dark Mode (via body[data-theme-version="dark"])
+
    Colors:
-   - Background Dark:    #0D0D0D (deepest), #141414 (surface), #1C1C1C (cards)
-   - Accent Orange-Red:  #E8491D (primary CTA), #D63B10 (hover)
-   - White:              #FFFFFF (text, headings)
-   - Muted:              #8A8A8A (secondary text), #555555 (borders)
-   - Surface Warm:       #252525 (input fields, nav items)
-   
-   Typography:
-   - Headings: Outfit 700/800/900
-   - Body: Plus Jakarta Sans 400/500/600/700
+   - Primary Accent: #E8491D (Chowdeck / Uber Eats Vibrant Red-Orange)
+   - Accent Hover:   #D63B10
+   - Light Canvas:   #F9FAFB (Default)
+   - Light Cards:    #FFFFFF (Default)
+   - Dark Canvas:    #0D0D0D (Dark Mode)
+   - Dark Cards:     #1C1C1C (Dark Mode)
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap');
 
 /* --------------------------------------------------------------------------
-   CSS Custom Properties (Design Tokens)
+   Default Theme Variables: LIGHT MODE
    -------------------------------------------------------------------------- */
 :root {
+  --g-bg-deepest: #F9FAFB;
+  --g-bg-dark: #F3F4F6;
+  --g-bg-card: #FFFFFF;
+  --g-bg-elevated: #F1F5F9;
+  --g-bg-input: #FFFFFF;
+  --g-accent: #E8491D;
+  --g-accent-hover: #D63B10;
+  --g-accent-light: rgba(232, 73, 29, 0.08);
+  --g-accent-glow: rgba(232, 73, 29, 0.22);
+  --g-white: #0F172A; /* Primary text / headings in light mode */
+  --g-text: #1E293B;
+  --g-text-secondary: #475569;
+  --g-text-muted: #64748B;
+  --g-border: #E2E8F0;
+  --g-border-light: #F1F5F9;
+  --g-success: #16A34A;
+  --g-warning: #D97706;
+  --g-radius-sm: 10px;
+  --g-radius: 16px;
+  --g-radius-lg: 24px;
+  --g-radius-xl: 32px;
+  --g-radius-full: 9999px;
+  --g-shadow-sm: 0 2px 8px -1px rgba(0, 0, 0, 0.04), 0 1px 4px -1px rgba(0, 0, 0, 0.02);
+  --g-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.06), 0 4px 12px -2px rgba(0, 0, 0, 0.03);
+  --g-shadow-lg: 0 20px 40px -4px rgba(232, 73, 29, 0.12), 0 8px 16px -4px rgba(0, 0, 0, 0.04);
+  --g-shadow-accent: 0 6px 20px rgba(232, 73, 29, 0.25);
+  --g-transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --------------------------------------------------------------------------
+   DARK MODE OVERRIDES (via body[data-theme-version="dark"])
+   -------------------------------------------------------------------------- */
+body[data-theme-version="dark"] {
   --g-bg-deepest: #0D0D0D;
   --g-bg-dark: #141414;
   --g-bg-card: #1C1C1C;
@@ -27,24 +58,17 @@
   --g-bg-input: #1E1E1E;
   --g-accent: #E8491D;
   --g-accent-hover: #D63B10;
-  --g-accent-light: rgba(232, 73, 29, 0.12);
+  --g-accent-light: rgba(232, 73, 29, 0.15);
   --g-accent-glow: rgba(232, 73, 29, 0.35);
   --g-white: #FFFFFF;
   --g-text: #F5F5F5;
-  --g-text-secondary: #8A8A8A;
-  --g-text-muted: #666666;
+  --g-text-secondary: #94A3B8;
+  --g-text-muted: #64748B;
   --g-border: #2A2A2A;
   --g-border-light: #333333;
-  --g-success: #22C55E;
-  --g-warning: #F59E0B;
-  --g-radius-sm: 10px;
-  --g-radius: 14px;
-  --g-radius-lg: 20px;
-  --g-radius-xl: 28px;
-  --g-radius-full: 9999px;
-  --g-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-  --g-shadow-accent: 0 6px 24px rgba(232, 73, 29, 0.3);
-  --g-transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  --g-shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.3);
+  --g-shadow: 0 10px 35px rgba(0, 0, 0, 0.5);
+  --g-shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.6);
 }
 
 /* --------------------------------------------------------------------------
@@ -62,6 +86,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 h1, h2, h3, h4, h5, h6,
@@ -80,10 +105,10 @@ a {
 
 ::selection {
   background: var(--g-accent);
-  color: var(--g-white);
+  color: #FFFFFF;
 }
 
-/* Override Bootstrap bg-light and bg-white for dark theme */
+/* Bootstrap Theme Adaptations */
 .bg-light { background-color: var(--g-bg-dark) !important; }
 .bg-white { background-color: var(--g-bg-card) !important; }
 .text-dark { color: var(--g-white) !important; }
@@ -91,11 +116,11 @@ a {
 .border { border-color: var(--g-border) !important; }
 .border-top { border-top-color: var(--g-border) !important; }
 .border-bottom { border-bottom-color: var(--g-border) !important; }
-.shadow-sm { box-shadow: 0 2px 12px rgba(0,0,0,0.3) !important; }
+.shadow-sm { box-shadow: var(--g-shadow-sm) !important; }
 .shadow-lg { box-shadow: var(--g-shadow) !important; }
 .card { background-color: var(--g-bg-card); border-color: var(--g-border); color: var(--g-text); }
 
-/* Form controls dark theme */
+/* Form Controls */
 .form-control,
 .form-select {
   background-color: var(--g-bg-input);
@@ -106,7 +131,7 @@ a {
 
 .form-control:focus,
 .form-select:focus {
-  background-color: var(--g-bg-elevated);
+  background-color: var(--g-bg-card);
   border-color: var(--g-accent);
   color: var(--g-white);
   box-shadow: 0 0 0 3px var(--g-accent-light);
@@ -120,22 +145,22 @@ a {
   color: var(--g-text-secondary);
 }
 
-/* Alerts dark */
+/* Alerts */
 .alert { border: none; }
-.alert-success { background: rgba(34, 197, 94, 0.12); color: var(--g-success); }
+.alert-success { background: rgba(22, 163, 74, 0.1); color: var(--g-success); }
 .alert-primary { background: var(--g-accent-light); color: var(--g-accent); }
-.alert-danger { background: rgba(232, 73, 29, 0.12); color: var(--g-accent); }
+.alert-danger { background: rgba(232, 73, 29, 0.1); color: var(--g-accent); }
 
 /* --------------------------------------------------------------------------
-   Buttons — Clean, Pill, Minimal
+   Buttons — Chowdeck / Uber Eats Rounded-Full Pill Style
    -------------------------------------------------------------------------- */
 .btn-glozzy-primary {
   background: var(--g-accent);
-  color: var(--g-white) !important;
+  color: #FFFFFF !important;
   border: none;
   border-radius: var(--g-radius-full);
   font-weight: 700;
-  font-size: 14px;
+  font-size: 15px;
   padding: 12px 28px;
   display: inline-flex;
   align-items: center;
@@ -150,13 +175,13 @@ a {
 .btn-glozzy-primary:hover,
 .btn-glozzy-primary:focus {
   background: var(--g-accent-hover);
-  color: var(--g-white) !important;
+  color: #FFFFFF !important;
   transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(232, 73, 29, 0.45);
+  box-shadow: 0 8px 24px rgba(232, 73, 29, 0.35);
 }
 
 .btn-glozzy-primary:disabled {
-  opacity: 0.4;
+  opacity: 0.45;
   transform: none;
   box-shadow: none;
 }
@@ -164,10 +189,10 @@ a {
 .btn-glozzy-accent {
   background: var(--g-bg-elevated);
   color: var(--g-white) !important;
-  border: 1px solid var(--g-border-light);
+  border: 1px solid var(--g-border);
   border-radius: var(--g-radius-full);
   font-weight: 700;
-  font-size: 14px;
+  font-size: 15px;
   padding: 12px 28px;
   display: inline-flex;
   align-items: center;
@@ -178,18 +203,18 @@ a {
 }
 
 .btn-glozzy-accent:hover {
-  background: var(--g-border-light);
+  background: var(--g-border);
   color: var(--g-white) !important;
   transform: translateY(-1px);
 }
 
 .btn-glozzy-whatsapp {
   background: #25D366;
-  color: var(--g-white) !important;
+  color: #FFFFFF !important;
   border: none;
   border-radius: var(--g-radius-full);
   font-weight: 700;
-  font-size: 14px;
+  font-size: 15px;
   padding: 12px 24px;
   display: inline-flex;
   align-items: center;
@@ -202,12 +227,11 @@ a {
 
 .btn-glozzy-whatsapp:hover {
   background: #1EBE5D;
-  color: var(--g-white) !important;
+  color: #FFFFFF !important;
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4);
 }
 
-/* Override Bootstrap btn-outline-danger to match our accent */
 .btn-outline-danger {
   color: var(--g-accent) !important;
   border-color: var(--g-accent) !important;
@@ -215,7 +239,7 @@ a {
 
 .btn-outline-danger:hover {
   background-color: var(--g-accent) !important;
-  color: var(--g-white) !important;
+  color: #FFFFFF !important;
 }
 
 .btn-danger {
@@ -229,13 +253,12 @@ a {
 }
 
 .btn-outline-light {
-  border-color: rgba(255,255,255,0.2) !important;
-  color: var(--g-white) !important;
+  border-color: var(--g-border) !important;
+  color: var(--g-text) !important;
 }
 
 .btn-outline-light:hover {
-  background: rgba(255,255,255,0.1) !important;
-  border-color: rgba(255,255,255,0.3) !important;
+  background: var(--g-bg-elevated) !important;
   color: var(--g-white) !important;
 }
 
@@ -246,25 +269,26 @@ a {
 }
 
 .btn-light:hover {
-  background: var(--g-border-light) !important;
+  background: var(--g-border) !important;
   color: var(--g-white) !important;
 }
 
 .btn-warning {
   background: var(--g-accent) !important;
   border-color: var(--g-accent) !important;
-  color: var(--g-white) !important;
+  color: #FFFFFF !important;
 }
 
 .btn-warning:hover {
   background: var(--g-accent-hover) !important;
   border-color: var(--g-accent-hover) !important;
-  color: var(--g-white) !important;
+  color: #FFFFFF !important;
 }
 
 .btn-white { 
-  background: var(--g-bg-elevated) !important;
+  background: var(--g-bg-card) !important;
   color: var(--g-text) !important;
+  border-color: var(--g-border) !important;
 }
 
 .btn-outline-success {
@@ -274,11 +298,11 @@ a {
 
 .btn-outline-success:hover {
   background: #25D366 !important;
-  color: var(--g-white) !important;
+  color: #FFFFFF !important;
 }
 
 .btn-outline-secondary {
-  border-color: var(--g-border-light) !important;
+  border-color: var(--g-border) !important;
   color: var(--g-text-secondary) !important;
 }
 
@@ -287,18 +311,11 @@ a {
   color: var(--g-white) !important;
 }
 
-.btn-success {
-  background: #25D366 !important;
-  border-color: #25D366 !important;
-}
-
-/* --------------------------------------------------------------------------
-   Badge Overrides
-   -------------------------------------------------------------------------- */
+/* Badges */
 .badge.bg-danger { background: var(--g-accent) !important; }
 .badge.bg-success { background: var(--g-success) !important; }
-.badge.bg-warning { background: var(--g-warning) !important; color: #000 !important; }
-.badge.bg-secondary { background: var(--g-bg-elevated) !important; }
+.badge.bg-warning { background: var(--g-warning) !important; color: #FFFFFF !important; }
+.badge.bg-secondary { background: var(--g-bg-elevated) !important; color: var(--g-text-secondary) !important; }
 .badge.bg-light { background: var(--g-bg-elevated) !important; color: var(--g-text) !important; }
 
 .bg-danger { background-color: var(--g-accent) !important; }
@@ -309,30 +326,26 @@ a {
 .border-danger { border-color: var(--g-accent) !important; }
 
 .bg-danger.bg-opacity-10 { background-color: var(--g-accent-light) !important; }
-.bg-success.bg-opacity-10 { background-color: rgba(34, 197, 94, 0.12) !important; }
-.bg-warning.bg-opacity-10 { background-color: rgba(245, 158, 11, 0.12) !important; }
+.bg-success.bg-opacity-10 { background-color: rgba(22, 163, 74, 0.1) !important; }
+.bg-warning.bg-opacity-10 { background-color: rgba(217, 119, 6, 0.1) !important; }
 
-/* --------------------------------------------------------------------------
-   Breadcrumb Dark
-   -------------------------------------------------------------------------- */
+/* Breadcrumbs */
 .breadcrumb { background: transparent; }
 .breadcrumb-item a { color: var(--g-text-secondary); }
 .breadcrumb-item.active { color: var(--g-accent); }
 .breadcrumb-item + .breadcrumb-item::before { color: var(--g-text-muted); }
 
-/* --------------------------------------------------------------------------
-   Top Announcement Bar
-   -------------------------------------------------------------------------- */
+/* Top Announcement Bar */
 .glozzy-topbar {
   background: var(--g-accent);
-  color: var(--g-white);
+  color: #FFFFFF;
   font-size: 13px;
   padding: 8px 0;
   font-weight: 600;
 }
 
 .glozzy-topbar a {
-  color: var(--g-white);
+  color: #FFFFFF;
   text-decoration: underline;
   text-underline-offset: 2px;
 }
@@ -342,18 +355,22 @@ a {
 }
 
 /* --------------------------------------------------------------------------
-   Dark Glass Navbar
+   Header / Navbar (Light / Dark Adaptive Glassmorphism)
    -------------------------------------------------------------------------- */
 .glozzy-navbar {
-  background: rgba(13, 13, 13, 0.92);
+  background: rgba(255, 255, 255, 0.94);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--g-border);
   position: sticky;
   top: 0;
   z-index: 1020;
-  padding: 12px 0;
+  padding: 14px 0;
   transition: var(--g-transition);
+}
+
+body[data-theme-version="dark"] .glozzy-navbar {
+  background: rgba(13, 13, 13, 0.94);
 }
 
 .glozzy-logo-wrap {
@@ -364,7 +381,7 @@ a {
 
 .glozzy-logo-badge {
   background: var(--g-accent);
-  color: var(--g-white);
+  color: #FFFFFF;
   font-family: 'Outfit', sans-serif;
   font-weight: 900;
   font-size: 18px;
@@ -403,11 +420,11 @@ a {
 
 .glozzy-nav-link:hover,
 .glozzy-nav-link.active {
-  color: var(--g-white);
-  background-color: var(--g-bg-elevated);
+  color: var(--g-accent);
+  background-color: var(--g-accent-light);
 }
 
-/* Dropdown dark */
+/* Dropdown */
 .dropdown-menu {
   background: var(--g-bg-card);
   border: 1px solid var(--g-border);
@@ -429,14 +446,18 @@ a {
 }
 
 /* --------------------------------------------------------------------------
-   Hero Section — Dark Premium
+   Hero Section — Chowdeck Clean Aesthetic
    -------------------------------------------------------------------------- */
 .glozzy-hero {
-  background: linear-gradient(180deg, var(--g-bg-dark) 0%, var(--g-bg-deepest) 100%);
+  background: linear-gradient(180deg, #FFFFFF 0%, #F9FAFB 100%);
   padding: 60px 0 80px;
   position: relative;
   overflow: hidden;
   border-bottom: 1px solid var(--g-border);
+}
+
+body[data-theme-version="dark"] .glozzy-hero {
+  background: linear-gradient(180deg, #141414 0%, #0D0D0D 100%);
 }
 
 .glozzy-hero-tag {
@@ -449,7 +470,7 @@ a {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  border: 1px solid rgba(232, 73, 29, 0.2);
+  border: 1px solid rgba(232, 73, 29, 0.15);
 }
 
 .glozzy-hero-title {
@@ -479,8 +500,8 @@ a {
 
 .glozzy-hero-main-img {
   border-radius: var(--g-radius-xl);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-  border: 2px solid var(--g-border);
+  box-shadow: var(--g-shadow-lg);
+  border: 4px solid var(--g-bg-card);
   width: 100%;
   max-height: 420px;
   object-fit: cover;
@@ -491,8 +512,22 @@ a {
   transform: scale(1.02);
 }
 
+/* Hero Floating Glass Chips */
+.glozzy-floating-chip {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--g-border);
+  border-radius: var(--g-radius);
+  box-shadow: var(--g-shadow);
+}
+
+body[data-theme-version="dark"] .glozzy-floating-chip {
+  background: rgba(28, 28, 28, 0.92);
+}
+
 /* --------------------------------------------------------------------------
-   Category Cards — Dark Rounded
+   Category Cards — Clean Capsules
    -------------------------------------------------------------------------- */
 .glozzy-category-card {
   background: var(--g-bg-card);
@@ -506,13 +541,14 @@ a {
   align-items: center;
   justify-content: center;
   height: 100%;
+  box-shadow: var(--g-shadow-sm);
 }
 
 .glozzy-category-card:hover {
   border-color: var(--g-accent);
   transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(232, 73, 29, 0.15);
-  background: var(--g-bg-elevated);
+  box-shadow: 0 12px 32px rgba(232, 73, 29, 0.12);
+  background: var(--g-bg-card);
 }
 
 .glozzy-cat-icon-wrap {
@@ -521,8 +557,8 @@ a {
   border-radius: 50%;
   margin: 0 auto 10px;
   overflow: hidden;
-  border: 3px solid var(--g-border-light);
-  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+  border: 3px solid var(--g-bg-card);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
 }
 
 .glozzy-cat-icon-wrap img {
@@ -549,7 +585,7 @@ a {
 }
 
 /* --------------------------------------------------------------------------
-   Food Product Cards — Dark Premium
+   Food Product Cards — Modern Clean
    -------------------------------------------------------------------------- */
 .glozzy-food-card {
   background: var(--g-bg-card);
@@ -560,11 +596,12 @@ a {
   height: 100%;
   display: flex;
   flex-direction: column;
+  box-shadow: var(--g-shadow-sm);
 }
 
 .glozzy-food-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+  box-shadow: var(--g-shadow);
   border-color: var(--g-accent);
 }
 
@@ -601,8 +638,8 @@ a {
 }
 
 .badge-glozzy-category {
-  background: rgba(0, 0, 0, 0.7);
-  color: var(--g-white);
+  background: rgba(255, 255, 255, 0.92);
+  color: #0F172A;
   font-size: 10px;
   font-weight: 700;
   padding: 4px 10px;
@@ -610,11 +647,17 @@ a {
   backdrop-filter: blur(8px);
   text-transform: uppercase;
   letter-spacing: 0.04em;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+body[data-theme-version="dark"] .badge-glozzy-category {
+  background: rgba(0, 0, 0, 0.7);
+  color: #FFFFFF;
 }
 
 .badge-glozzy-discount {
   background: var(--g-accent);
-  color: var(--g-white);
+  color: #FFFFFF;
   font-size: 10px;
   font-weight: 800;
   padding: 4px 8px;
@@ -623,7 +666,7 @@ a {
 
 .badge-glozzy-featured {
   background: var(--g-warning);
-  color: #000;
+  color: #FFFFFF;
   font-size: 10px;
   font-weight: 800;
   padding: 4px 8px;
@@ -643,22 +686,28 @@ a {
 .glozzy-action-circle {
   width: 34px;
   height: 34px;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(8px);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--g-white);
+  color: #0F172A;
   border: none;
   cursor: pointer;
   transition: var(--g-transition);
   font-size: 14px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+body[data-theme-version="dark"] .glozzy-action-circle {
+  background: rgba(0, 0, 0, 0.6);
+  color: #FFFFFF;
 }
 
 .glozzy-action-circle:hover {
   background: var(--g-accent);
-  color: var(--g-white);
+  color: #FFFFFF;
   transform: scale(1.1);
 }
 
@@ -730,7 +779,7 @@ a {
   right: 25px;
   z-index: 1040;
   background-color: #25D366;
-  color: var(--g-white);
+  color: #FFFFFF;
   width: 54px;
   height: 54px;
   border-radius: 50%;
@@ -754,7 +803,7 @@ a {
 
 .whatsapp-floating-btn:hover {
   transform: scale(1.08) translateY(-2px);
-  color: var(--g-white);
+  color: #FFFFFF;
   box-shadow: 0 10px 32px rgba(37, 211, 102, 0.55);
 }
 
@@ -773,7 +822,7 @@ a {
 }
 
 /* --------------------------------------------------------------------------
-   Mobile Floating Dock Bottom Nav — Dark Premium
+   Mobile Floating Dock Bottom Nav
    -------------------------------------------------------------------------- */
 .glozzy-mobile-nav {
   position: fixed;
@@ -781,7 +830,7 @@ a {
   left: 14px;
   right: 14px;
   z-index: 1030;
-  background: rgba(20, 20, 20, 0.95);
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   border-radius: var(--g-radius-full);
@@ -789,8 +838,13 @@ a {
   justify-content: space-around;
   align-items: center;
   padding: 10px 14px;
-  box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
   border: 1px solid var(--g-border);
+}
+
+body[data-theme-version="dark"] .glozzy-mobile-nav {
+  background: rgba(20, 20, 20, 0.95);
+  box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.5);
 }
 
 @media (max-width: 991px) {
@@ -819,7 +873,7 @@ a {
 }
 
 .glozzy-mobile-nav-item.active {
-  color: var(--g-white);
+  color: #FFFFFF;
   background: var(--g-accent);
 }
 
@@ -828,7 +882,7 @@ a {
   top: 0;
   right: 6px;
   background: var(--g-accent);
-  color: var(--g-white);
+  color: #FFFFFF;
   font-size: 9px;
   font-weight: 800;
   width: 17px;
@@ -837,11 +891,11 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid var(--g-bg-dark);
+  border: 2px solid var(--g-bg-card);
 }
 
 /* --------------------------------------------------------------------------
-   Footer — Dark
+   Footer
    -------------------------------------------------------------------------- */
 .glozzy-footer {
   background: var(--g-bg-dark);
@@ -858,7 +912,7 @@ a {
 }
 
 /* --------------------------------------------------------------------------
-   Modal Dark Theme
+   Modal
    -------------------------------------------------------------------------- */
 .modal-content {
   background: var(--g-bg-card);
@@ -874,7 +928,7 @@ a {
   border-top-color: var(--g-border);
 }
 
-.btn-close {
+body[data-theme-version="dark"] .btn-close {
   filter: invert(1);
 }
 
@@ -898,7 +952,7 @@ a {
 }
 
 /* --------------------------------------------------------------------------
-   Table Dark
+   Table
    -------------------------------------------------------------------------- */
 .table {
   color: var(--g-text);
@@ -931,10 +985,11 @@ a {
 .page-item.active .page-link {
   background: var(--g-accent);
   border-color: var(--g-accent);
+  color: #FFFFFF;
 }
 
 /* --------------------------------------------------------------------------
-   Scrollbar Styling
+   Scrollbar
    -------------------------------------------------------------------------- */
 ::-webkit-scrollbar {
   width: 6px;
@@ -945,7 +1000,7 @@ a {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--g-border-light);
+  background: var(--g-border);
   border-radius: var(--g-radius-full);
 }
 
@@ -954,14 +1009,13 @@ a {
 }
 
 /* --------------------------------------------------------------------------
-   Misc Utility Overrides
+   Misc Utilities
    -------------------------------------------------------------------------- */
-.text-white-50 { color: rgba(255,255,255,0.45) !important; }
+.text-white-50 { color: var(--g-text-muted) !important; }
 .border-secondary { border-color: var(--g-border) !important; }
 .border-start.border-4.border-danger { border-left-color: var(--g-accent) !important; }
 .font-monospace { color: var(--g-accent); }
 
-/* Tab / Nav Pills override */
 .nav-pills .nav-link {
   color: var(--g-text-secondary);
   background: var(--g-bg-elevated);
@@ -970,146 +1024,34 @@ a {
 
 .nav-pills .nav-link.active {
   background: var(--g-accent);
-  color: var(--g-white);
+  color: #FFFFFF;
 }
 
-/* Input group dark */
 .input-group .btn {
   border-color: var(--g-border) !important;
 }
 
-/* Range slider accent */
 .form-range::-webkit-slider-thumb {
   background-color: var(--g-accent);
 }
-.form-range::-moz-range-thumb {
-  background-color: var(--g-accent);
-}
-.form-range:focus::-webkit-slider-thumb {
-  box-shadow: 0 0 0 1px #0D0D0D, 0 0 0 0.25rem rgba(232, 73, 29, 0.25);
-}
-.form-range::-webkit-slider-runnable-track {
-  background-color: var(--g-border);
-}
-.form-range::-moz-range-track {
-  background-color: var(--g-border);
-}
 
-/* Switch styling */
 .form-check-input:checked {
   background-color: var(--g-accent);
   border-color: var(--g-accent);
 }
 
 /* --------------------------------------------------------------------------
-   Order Tracking Timeline
-   -------------------------------------------------------------------------- */
-.glozzy-timeline {
-  display: flex;
-  justify-content: space-between;
-  position: relative;
-  margin: 30px 0;
-}
-
-.glozzy-timeline::before {
-  content: '';
-  position: absolute;
-  top: 22px;
-  left: 30px;
-  right: 30px;
-  height: 3px;
-  background: var(--g-border);
-  z-index: 1;
-}
-
-.glozzy-timeline-step {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  z-index: 2;
-  flex: 1;
-  text-align: center;
-}
-
-.glozzy-step-icon {
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  background: var(--g-bg-elevated);
-  border: 2px solid var(--g-border);
-  color: var(--g-text-muted);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  margin-bottom: 8px;
-  transition: var(--g-transition);
-}
-
-.glozzy-step-title {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--g-text-muted);
-  transition: var(--g-transition);
-}
-
-.glozzy-timeline-step.completed .glozzy-step-icon {
-  background: var(--g-accent);
-  border-color: var(--g-accent);
-  color: var(--g-white);
-  box-shadow: 0 0 14px rgba(232, 73, 29, 0.4);
-}
-
-.glozzy-timeline-step.completed .glozzy-step-title {
-  color: var(--g-text);
-  font-weight: 700;
-}
-
-.glozzy-timeline-step.current .glozzy-step-icon {
-  background: var(--g-bg-card);
-  border-color: var(--g-accent);
-  color: var(--g-accent);
-  box-shadow: 0 0 18px rgba(232, 73, 29, 0.5);
-  animation: pulse-border 2s infinite;
-}
-
-.glozzy-timeline-step.current .glozzy-step-title {
-  color: var(--g-accent);
-  font-weight: 800;
-}
-
-@media (max-width: 768px) {
-  .glozzy-timeline {
-    flex-direction: column;
-    gap: 20px;
-    align-items: flex-start;
-    padding-left: 20px;
-  }
-  .glozzy-timeline::before {
-    top: 22px;
-    bottom: 22px;
-    left: 42px;
-    right: auto;
-    width: 3px;
-    height: calc(100% - 44px);
-  }
-  .glozzy-timeline-step {
-    flex-direction: row;
-    gap: 16px;
-    text-align: left;
-    width: 100%;
-  }
-}
-
-/* --------------------------------------------------------------------------
-   Admin Panel — Dark Theme
+   Admin Sidebar & Header
    -------------------------------------------------------------------------- */
 .admin-sidebar {
-  background: var(--g-bg-dark);
-  border-right: 1px solid var(--g-border);
+  background: #0B0F19;
+  border-right: 1px solid rgba(255,255,255,0.08);
   min-height: 100vh;
   overflow-y: auto;
+}
+
+body[data-theme-version="dark"] .admin-sidebar {
+  background: var(--g-bg-dark);
 }
 
 .admin-nav-item {
@@ -1118,20 +1060,20 @@ a {
   gap: 12px;
   padding: 10px 16px;
   border-radius: var(--g-radius-sm);
-  color: var(--g-text-secondary);
+  color: #94A3B8;
   font-size: 14px;
   font-weight: 600;
   transition: var(--g-transition);
 }
 
 .admin-nav-item:hover {
-  background: var(--g-bg-elevated);
-  color: var(--g-white);
+  background: rgba(255,255,255,0.06);
+  color: #FFFFFF;
 }
 
 .admin-nav-item.active {
   background: var(--g-accent);
-  color: var(--g-white);
+  color: #FFFFFF;
   box-shadow: var(--g-shadow-accent);
 }
 
@@ -1141,14 +1083,11 @@ a {
   font-size: 15px;
 }
 
-/* Admin Header */
 .admin-header {
   background: var(--g-bg-card);
   border-bottom: 1px solid var(--g-border);
 }
 
-/* Admin main content area */
 .admin-main {
   background: var(--g-bg-deepest);
 }
-

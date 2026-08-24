@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useStore } from "../../context/StoreContext";
 import { useAuth } from "../../context/AuthContext";
@@ -9,7 +9,19 @@ const Header = () => {
   const { currentUser, isAdmin, logout } = useAuth();
   const [searchQuery, setSearchQuery] = useState("");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [themeMode, setThemeMode] = useState(() => {
+    return localStorage.getItem("glozzy_theme") || "light";
+  });
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.body.setAttribute("data-theme-version", themeMode);
+    localStorage.setItem("glozzy_theme", themeMode);
+  }, [themeMode]);
+
+  const toggleTheme = () => {
+    setThemeMode((prev) => (prev === "light" ? "dark" : "light"));
+  };
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -33,7 +45,7 @@ const Header = () => {
               <Link to="/order-tracking" className="d-none d-md-inline text-white opacity-75">
                 <i className="fa-solid fa-truck-fast me-1"></i> Track Order
               </Link>
-              <Link to="/admin" className="badge bg-dark text-white px-2 py-1" style={{ border: "1px solid rgba(255,255,255,0.2)" }}>
+              <Link to="/admin" className="badge bg-white text-danger font-weight-bold px-2 py-1">
                 <i className="fa-solid fa-shield-halved me-1"></i> Admin
               </Link>
             </div>
@@ -111,6 +123,18 @@ const Header = () => {
 
             {/* Actions */}
             <div className="d-flex align-items-center gap-2">
+              {/* Theme Toggle Button (Light/Dark Switcher) */}
+              <button
+                type="button"
+                className="btn btn-light rounded-circle d-flex align-items-center justify-content-center"
+                style={{ width: "40px", height: "40px" }}
+                onClick={toggleTheme}
+                title={themeMode === "light" ? "Switch to Dark Mode" : "Switch to Light Mode"}
+                aria-label="Toggle theme"
+              >
+                <i className={`fa-solid ${themeMode === "light" ? "fa-moon text-dark" : "fa-sun text-warning"} fs-6`}></i>
+              </button>
+
               {/* Wishlist */}
               <Link
                 to="/shop"
@@ -133,7 +157,7 @@ const Header = () => {
                 title="View Cart"
               >
                 <i className="fa-solid fa-bag-shopping"></i>
-                <span className="badge bg-dark text-white fw-bold rounded-pill" style={{ border: "1px solid rgba(255,255,255,0.2)" }}>{cartCount}</span>
+                <span className="badge bg-white text-danger fw-bold rounded-pill">{cartCount}</span>
                 <span className="d-none d-xl-inline">{formatNaira(cartSubtotal)}</span>
               </Link>
 
@@ -223,6 +247,14 @@ const Header = () => {
                 <Link to="/contact" onClick={() => setMobileMenuOpen(false)} className="py-2 px-3 rounded-2 fw-semibold">
                   <i className="fa-solid fa-phone me-2 text-danger"></i> Contact
                 </Link>
+                <button
+                  type="button"
+                  className="btn btn-light w-100 text-start py-2 px-3 rounded-pill fw-semibold d-flex align-items-center justify-content-between"
+                  onClick={toggleTheme}
+                >
+                  <span>Theme: {themeMode === "light" ? "Light Mode" : "Dark Mode"}</span>
+                  <i className={`fa-solid ${themeMode === "light" ? "fa-moon text-dark" : "fa-sun text-warning"}`}></i>
+                </button>
                 {!currentUser && (
                   <Link to="/login" onClick={() => setMobileMenuOpen(false)} className="btn btn-danger w-100 mt-2 rounded-pill py-2">
                     Login / Register
