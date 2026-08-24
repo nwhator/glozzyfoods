@@ -4,7 +4,7 @@ import Header from "../Common/Header";
 import Footer from "../Common/Footer";
 import MobileBottomNav from "../Common/MobileBottomNav";
 import WhatsAppFloating from "../Common/WhatsAppFloating";
-import ScrollToTop from "../../jsx/layouts/ScrollToTop";
+import ScrollToTop from "../Common/ScrollToTop";
 
 const CustomerLayout = () => {
   return (
