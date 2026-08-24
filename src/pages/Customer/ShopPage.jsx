@@ -98,12 +98,12 @@ const ShopPage = () => {
           </nav>
           <div className="d-flex justify-content-between align-items-center flex-wrap gap-2">
             <div>
-              <h2 className="fw-bold text-dark mb-1">Our Full Food Catalogue</h2>
+              <h2 className="fw-bold text-white mb-1">Our Full Food Catalogue</h2>
               <p className="text-muted small mb-0">
                 Freshly prepared African dishes, confectionery cakes, small chops, parfaits, and drinks.
               </p>
             </div>
-            <span className="badge bg-danger bg-opacity-10 text-danger px-3 py-2 fw-bold">
+            <span className="badge bg-danger bg-opacity-10 text-danger rounded-pill px-3 py-2 fw-bold">
               {filteredProducts.length} {filteredProducts.length === 1 ? "dish found" : "dishes available"}
             </span>
           </div>
@@ -112,9 +112,9 @@ const ShopPage = () => {
         <div className="row g-4">
           {/* LEFT SIDEBAR: FILTERS */}
           <div className="col-lg-3">
-            <div className="card border-0 shadow-sm rounded-4 p-4 sticky-top" style={{ top: "90px" }}>
+            <div className="card border-0 shadow-sm rounded-4 p-4 bg-card sticky-top" style={{ top: "90px" }}>
               <div className="d-flex justify-content-between align-items-center mb-3">
-                <h5 className="fw-bold text-dark mb-0">Filters</h5>
+                <h5 className="fw-bold text-white mb-0">Filters</h5>
                 <button
                   type="button"
                   className="btn btn-link text-danger p-0 text-decoration-none small fw-semibold"
@@ -126,7 +126,7 @@ const ShopPage = () => {
 
               {/* Search */}
               <div className="mb-4">
-                <label className="form-label small fw-bold text-dark">Search Dishes</label>
+                <label className="form-label small fw-bold text-white">Search Dishes</label>
                 <div className="input-group input-group-sm">
                   <input
                     type="text"
@@ -149,19 +149,19 @@ const ShopPage = () => {
 
               {/* Categories */}
               <div className="mb-4">
-                <label className="form-label small fw-bold text-dark mb-2">Categories</label>
+                <label className="form-label small fw-bold text-white mb-2">Categories</label>
                 <div className="d-flex flex-column gap-1">
                   <button
                     type="button"
                     className={`btn btn-sm text-start rounded-pill px-3 py-2 d-flex justify-content-between align-items-center ${
                       selectedCategory === "all"
                         ? "btn-danger fw-bold text-white"
-                        : "btn-light text-dark"
+                        : "btn-light text-secondary"
                     }`}
                     onClick={() => handleCategorySelect("all")}
                   >
                     <span>All Categories</span>
-                    <span className="badge bg-white text-dark rounded-pill">
+                    <span className={`badge ${selectedCategory === "all" ? "bg-white text-danger" : "bg-dark border text-muted"} rounded-pill`}>
                       {products.filter((p) => p.active).length}
                     </span>
                   </button>
@@ -170,19 +170,20 @@ const ShopPage = () => {
                     .filter((c) => c.active)
                     .map((cat) => {
                       const count = products.filter((p) => p.active && p.categoryId === cat.id).length;
+                      const isSelected = selectedCategory === cat.id;
                       return (
                         <button
                           key={cat.id}
                           type="button"
                           className={`btn btn-sm text-start rounded-pill px-3 py-2 d-flex justify-content-between align-items-center ${
-                            selectedCategory === cat.id
+                            isSelected
                               ? "btn-danger fw-bold text-white"
-                              : "btn-light text-dark"
+                              : "btn-light text-secondary"
                           }`}
                           onClick={() => handleCategorySelect(cat.id)}
                         >
-                          <span>{cat.name}</span>
-                          <span className={`badge ${selectedCategory === cat.id ? "bg-white text-danger" : "bg-white text-muted"} rounded-pill`}>
+                          <span className="text-truncate me-2">{cat.name}</span>
+                          <span className={`badge ${isSelected ? "bg-white text-danger" : "bg-dark border text-muted"} rounded-pill`}>
                             {count}
                           </span>
                         </button>
@@ -194,7 +195,7 @@ const ShopPage = () => {
               {/* Price Filter */}
               <div className="mb-4">
                 <div className="d-flex justify-content-between align-items-center mb-1">
-                  <label className="form-label small fw-bold text-dark mb-0">Max Price</label>
+                  <label className="form-label small fw-bold text-white mb-0">Max Price</label>
                   <span className="text-danger fw-bold small">{formatNaira(maxPrice)}</span>
                 </div>
                 <input
@@ -221,7 +222,7 @@ const ShopPage = () => {
                   checked={inStockOnly}
                   onChange={(e) => setInStockOnly(e.target.checked)}
                 />
-                <label className="form-check-label small fw-semibold text-dark" htmlFor="inStockCheck">
+                <label className="form-check-label small fw-semibold text-white" htmlFor="inStockCheck">
                   In-Stock Only
                 </label>
               </div>
@@ -231,7 +232,7 @@ const ShopPage = () => {
           {/* RIGHT COLUMN: PRODUCTS LISTING */}
           <div className="col-lg-9">
             {/* Top Toolbar */}
-            <div className="card border-0 shadow-sm rounded-4 p-3 mb-4 bg-white">
+            <div className="card border-0 shadow-sm rounded-4 p-3 mb-4 bg-card">
               <div className="d-flex justify-content-between align-items-center flex-wrap gap-3">
                 {/* Active Category Tag */}
                 <div className="d-flex align-items-center gap-2">
@@ -305,13 +306,13 @@ const ShopPage = () => {
             ) : (
               <div className="d-flex flex-column gap-3">
                 {filteredProducts.map((product) => (
-                  <div className="card border-0 shadow-sm rounded-4 overflow-hidden p-3" key={product.id}>
+                  <div className="card border-0 shadow-sm rounded-4 overflow-hidden p-3 bg-card" key={product.id}>
                     <div className="row g-3 align-items-center">
                       <div className="col-sm-3 col-4">
                         <img
                           src={product.image}
                           alt={product.name}
-                          className="w-100 rounded-3 object-fit-cover"
+                          className="w-100 rounded-3 object-fit-cover border"
                           style={{ height: "110px" }}
                         />
                       </div>
@@ -325,8 +326,8 @@ const ShopPage = () => {
                             {product.rating || "5.0"}
                           </span>
                         </div>
-                        <h5 className="fw-bold text-dark mb-1">
-                          <Link to={`/product/${product.slug}`} className="text-dark text-decoration-none">
+                        <h5 className="fw-bold text-white mb-1">
+                          <Link to={`/product/${product.slug}`} className="text-white text-decoration-none">
                             {product.name}
                           </Link>
                         </h5>

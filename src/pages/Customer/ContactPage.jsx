@@ -27,6 +27,7 @@ const ContactPage = () => {
   return (
     <div className="py-5">
       <div className="container">
+        {/* HEADER */}
         <div className="text-center mb-5" style={{ maxWidth: "600px", margin: "0 auto" }}>
           <span className="badge bg-danger bg-opacity-10 text-danger px-3 py-2 rounded-pill fw-bold mb-2">
             Get in Touch
@@ -42,9 +43,15 @@ const ContactPage = () => {
           <div className="col-lg-5">
             <div className="d-flex flex-column gap-3">
               {/* WhatsApp Card */}
-              <div className="card border-0 shadow-sm rounded-4 p-4 bg-white border-start border-success border-4">
+              <div
+                className="card border-0 shadow-sm rounded-4 p-4 bg-white"
+                style={{ borderLeft: "3px solid var(--g-accent)" }}
+              >
                 <div className="d-flex align-items-center gap-3">
-                  <div className="rounded-circle bg-success bg-opacity-10 text-success d-flex align-items-center justify-content-center" style={{ width: "50px", height: "50px", fontSize: "24px" }}>
+                  <div
+                    className="rounded-circle bg-success bg-opacity-10 text-success d-flex align-items-center justify-content-center flex-shrink-0"
+                    style={{ width: "50px", height: "50px", fontSize: "24px" }}
+                  >
                     <i className="fa-brands fa-whatsapp"></i>
                   </div>
                   <div>
@@ -63,25 +70,40 @@ const ContactPage = () => {
               </div>
 
               {/* Phone Call Card */}
-              <div className="card border-0 shadow-sm rounded-4 p-4 bg-white border-start border-danger border-4">
+              <div
+                className="card border-0 shadow-sm rounded-4 p-4 bg-white"
+                style={{ borderLeft: "3px solid var(--g-accent)" }}
+              >
                 <div className="d-flex align-items-center gap-3">
-                  <div className="rounded-circle bg-danger bg-opacity-10 text-danger d-flex align-items-center justify-content-center" style={{ width: "50px", height: "50px", fontSize: "22px" }}>
+                  <div
+                    className="rounded-circle bg-danger bg-opacity-10 text-danger d-flex align-items-center justify-content-center flex-shrink-0"
+                    style={{ width: "50px", height: "50px", fontSize: "22px" }}
+                  >
                     <i className="fa-solid fa-phone"></i>
                   </div>
                   <div>
                     <h6 className="fw-bold text-dark mb-1">Direct Phone Call</h6>
                     <p className="text-muted small mb-2">{phone}</p>
-                    <a href={`tel:${phone.replace(/\s+/g, "")}`} className="btn btn-outline-danger btn-sm rounded-pill px-3">
+                    <a
+                      href={`tel:${phone.replace(/\s+/g, "")}`}
+                      className="btn btn-outline-danger btn-sm rounded-pill px-3"
+                    >
                       Call Now
                     </a>
                   </div>
                 </div>
               </div>
 
-              {/* Location & Hours */}
-              <div className="card border-0 shadow-sm rounded-4 p-4 bg-white">
+              {/* Location & Hours Card */}
+              <div
+                className="card border-0 shadow-sm rounded-4 p-4 bg-white"
+                style={{ borderLeft: "3px solid var(--g-accent)" }}
+              >
                 <div className="d-flex align-items-center gap-3 mb-3">
-                  <div className="rounded-circle bg-warning bg-opacity-10 text-dark d-flex align-items-center justify-content-center" style={{ width: "45px", height: "45px", fontSize: "20px" }}>
+                  <div
+                    className="rounded-circle bg-danger bg-opacity-10 text-danger d-flex align-items-center justify-content-center flex-shrink-0"
+                    style={{ width: "45px", height: "45px", fontSize: "20px" }}
+                  >
                     <i className="fa-solid fa-location-dot text-danger"></i>
                   </div>
                   <div>
@@ -90,7 +112,10 @@ const ContactPage = () => {
                   </div>
                 </div>
                 <div className="d-flex align-items-center gap-3">
-                  <div className="rounded-circle bg-warning bg-opacity-10 text-dark d-flex align-items-center justify-content-center" style={{ width: "45px", height: "45px", fontSize: "20px" }}>
+                  <div
+                    className="rounded-circle bg-warning bg-opacity-10 text-warning d-flex align-items-center justify-content-center flex-shrink-0"
+                    style={{ width: "45px", height: "45px", fontSize: "20px" }}
+                  >
                     <i className="fa-solid fa-clock text-warning"></i>
                   </div>
                   <div>
@@ -176,14 +201,14 @@ const ContactPage = () => {
                   </div>
 
                   <div className="d-flex flex-column gap-2">
-                    <button type="submit" className="btn btn-glozzy-primary btn-lg w-100 py-3 shadow-sm">
+                    <button type="submit" className="btn btn-glozzy-primary btn-lg w-100 py-3 shadow-sm rounded-pill">
                       Send Message
                     </button>
                     <a
                       href={whatsappDirectUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="btn btn-glozzy-whatsapp btn-lg w-100 py-3"
+                      className="btn btn-glozzy-whatsapp btn-lg w-100 py-3 rounded-pill"
                     >
                       <i className="fa-brands fa-whatsapp me-2"></i> Send via WhatsApp Directly
                     </a>

@@ -55,7 +55,7 @@ const QuickViewModal = ({ show, onHide, product }) => {
         <div className="row g-4">
           {/* Image */}
           <div className="col-md-5">
-            <div className="rounded-3 overflow-hidden border">
+            <div className="rounded-3 overflow-hidden" style={{ border: "1px solid var(--g-border)" }}>
               <img
                 src={product.image}
                 alt={product.name}
@@ -67,7 +67,7 @@ const QuickViewModal = ({ show, onHide, product }) => {
 
           {/* Details */}
           <div className="col-md-7">
-            <h4 className="fw-bold text-dark mb-2">{product.name}</h4>
+            <h4 className="fw-bold mb-2">{product.name}</h4>
 
             {/* Price */}
             <div className="d-flex align-items-baseline gap-2 mb-3">
@@ -79,14 +79,14 @@ const QuickViewModal = ({ show, onHide, product }) => {
               )}
             </div>
 
-            <p className="text-muted small mb-3" style={{ lineHeight: "1.5" }}>
+            <p className="text-muted small mb-3" style={{ lineHeight: "1.6" }}>
               {product.shortDescription || product.description}
             </p>
 
             {/* Variants Picker */}
             {product.variants && product.variants.length > 0 && (
               <div className="mb-3">
-                <label className="form-label fw-bold small text-dark mb-2">
+                <label className="form-label fw-bold small mb-2">
                   Select {product.variants[0]?.name || "Option"}:
                 </label>
                 <div className="d-flex flex-wrap gap-2">
@@ -110,7 +110,7 @@ const QuickViewModal = ({ show, onHide, product }) => {
 
             {/* Quantity Selector */}
             <div className="d-flex align-items-center gap-3 mb-4">
-              <span className="fw-bold small text-dark">Quantity:</span>
+              <span className="fw-bold small">Quantity:</span>
               <div className="input-group" style={{ width: "120px" }}>
                 <button
                   type="button"
@@ -121,7 +121,7 @@ const QuickViewModal = ({ show, onHide, product }) => {
                 </button>
                 <input
                   type="text"
-                  className="form-control text-center fw-bold bg-white"
+                  className="form-control text-center fw-bold"
                   readOnly
                   value={quantity}
                 />
@@ -163,7 +163,7 @@ const QuickViewModal = ({ show, onHide, product }) => {
                 onClick={onHide}
                 className="text-danger fw-semibold small text-decoration-none"
               >
-                View Full Product Details & Ingredients &rarr;
+                View Full Details &rarr;
               </Link>
             </div>
           </div>

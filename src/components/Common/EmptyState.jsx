@@ -9,14 +9,14 @@ const EmptyState = ({
   actionLink = "/shop",
 }) => {
   return (
-    <div className="text-center py-5 px-3 my-4 bg-white rounded-4 border shadow-sm" style={{ maxWidth: "550px", margin: "0 auto" }}>
+    <div className="text-center py-5 px-3 my-4 rounded-4" style={{ maxWidth: "550px", margin: "0 auto", background: "var(--g-bg-card)", border: "1px solid var(--g-border)" }}>
       <div
-        className="rounded-circle bg-danger bg-opacity-10 text-danger d-inline-flex align-items-center justify-content-center mb-3"
-        style={{ width: "80px", height: "80px", fontSize: "32px" }}
+        className="rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+        style={{ width: "80px", height: "80px", fontSize: "32px", background: "var(--g-accent-light)", color: "var(--g-accent)" }}
       >
         <i className={icon}></i>
       </div>
-      <h4 className="fw-bold text-dark mb-2">{title}</h4>
+      <h4 className="fw-bold mb-2">{title}</h4>
       <p className="text-muted small mb-4" style={{ maxWidth: "400px", margin: "0 auto" }}>
         {description}
       </p>

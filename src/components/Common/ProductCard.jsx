@@ -47,12 +47,9 @@ const ProductCard = ({ product, onQuickView }) => {
           {discountPercentage && (
             <span className="badge-glozzy-discount">-{discountPercentage}%</span>
           )}
-          {product.featured && (
-            <span className="badge-glozzy-featured">Popular</span>
-          )}
         </div>
 
-        {/* Quick Action Circle Buttons */}
+        {/* Wishlist Button */}
         <div className="glozzy-card-quick-actions">
           <button
             type="button"
@@ -63,53 +60,39 @@ const ProductCard = ({ product, onQuickView }) => {
           >
             <i className={`fa-heart ${isWishlisted ? "fa-solid text-danger" : "fa-regular"}`}></i>
           </button>
-          <button
-            type="button"
-            className="glozzy-action-circle"
-            title="Quick View"
-            onClick={() => onQuickView && onQuickView(product)}
-            aria-label="Quick View"
-          >
-            <i className="fa-solid fa-eye"></i>
-          </button>
         </div>
       </div>
 
       {/* Card Content */}
       <div className="glozzy-card-body">
-        {/* Rating and Stock Indicator */}
-        <div className="d-flex align-items-center justify-content-between mb-1">
-          <div className="d-flex align-items-center gap-1 text-warning small">
-            <i className="fa-solid fa-star"></i>
-            <span className="text-dark fw-bold" style={{ fontSize: "12px" }}>
-              {product.rating || "5.0"}
-            </span>
-            <span className="text-muted" style={{ fontSize: "11px" }}>
-              ({product.reviewsCount || 10})
-            </span>
+        {/* Rating and Delivery Prep Time Indicator */}
+        <div className="d-flex align-items-center justify-content-between mb-1 text-muted" style={{ fontSize: "12px" }}>
+          <div className="d-flex align-items-center gap-1">
+            <i className="fa-solid fa-star text-warning"></i>
+            <span className="text-dark fw-bold">{product.rating || "5.0"}</span>
+            <span>({product.reviewsCount || 12})</span>
           </div>
           <div>
-            {isOutOfStock ? (
-              <span className="badge bg-secondary text-white" style={{ fontSize: "10px" }}>Out of Stock</span>
-            ) : (
-              <span className="badge bg-success bg-opacity-10 text-success" style={{ fontSize: "10px" }}>Fresh In Stock</span>
-            )}
+            <span className="badge bg-light text-dark border rounded-pill px-2 py-1">
+              <i className="fa-regular fa-clock me-1 text-danger"></i>
+              {product.preparationTime?.split("(")[0] || "25 - 35 mins"}
+            </span>
           </div>
         </div>
 
         {/* Product Title */}
-        <h3 className="glozzy-card-title">
+        <h4 className="glozzy-card-title">
           <Link to={`/product/${product.slug}`} className="text-dark text-decoration-none">
             {product.name}
           </Link>
-        </h3>
+        </h4>
 
         {/* Short Description */}
         <p className="glozzy-card-desc">
           {product.shortDescription || product.description}
         </p>
 
-        {/* Footer: Price & Add to Cart */}
+        {/* Footer: Price & Chowdeck Style Order Controls */}
         <div className="glozzy-card-footer">
           <div>
             <span className="glozzy-price">
@@ -139,7 +122,7 @@ const ProductCard = ({ product, onQuickView }) => {
               onClick={handleAddToCart}
               disabled={isOutOfStock}
             >
-              <i className="fa-solid fa-cart-plus me-1"></i>
+              <i className="fa-solid fa-plus me-1"></i>
               {hasVariants ? "Options" : "Add"}
             </button>
           </div>

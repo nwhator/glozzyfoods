@@ -125,7 +125,7 @@ const CheckoutPage = () => {
           </ol>
         </nav>
 
-        <h2 className="fw-bold text-dark mb-4">Complete Your Order</h2>
+        <h2 className="fw-bold text-white mb-4">Complete Your Order</h2>
 
         {formError && (
           <div className="alert alert-danger rounded-4 py-2 px-3 mb-4 shadow-sm">
@@ -140,7 +140,7 @@ const CheckoutPage = () => {
             <div className="col-lg-7">
               {/* Order Type Toggle */}
               <div className="card border-0 shadow-sm rounded-4 p-4 bg-white mb-4">
-                <h5 className="fw-bold text-dark mb-3">1. Order Method</h5>
+                <h5 className="fw-bold text-white mb-3">1. Order Method</h5>
                 <div className="row g-3">
                   <div className="col-6">
                     <div
@@ -173,10 +173,10 @@ const CheckoutPage = () => {
 
               {/* Contact Information */}
               <div className="card border-0 shadow-sm rounded-4 p-4 bg-white mb-4">
-                <h5 className="fw-bold text-dark mb-3">2. Customer Details</h5>
+                <h5 className="fw-bold text-white mb-3">2. Customer Details</h5>
                 <div className="row g-3">
                   <div className="col-12">
-                    <label className="form-label small fw-bold">Full Name *</label>
+                    <label className="form-label small fw-bold text-muted">Full Name *</label>
                     <input
                       type="text"
                       className="form-control rounded-3"
@@ -187,7 +187,7 @@ const CheckoutPage = () => {
                     />
                   </div>
                   <div className="col-md-6">
-                    <label className="form-label small fw-bold">Phone Number (WhatsApp) *</label>
+                    <label className="form-label small fw-bold text-muted">Phone Number (WhatsApp) *</label>
                     <input
                       type="tel"
                       className="form-control rounded-3"
@@ -198,7 +198,7 @@ const CheckoutPage = () => {
                     />
                   </div>
                   <div className="col-md-6">
-                    <label className="form-label small fw-bold">Email Address</label>
+                    <label className="form-label small fw-bold text-muted">Email Address</label>
                     <input
                       type="email"
                       className="form-control rounded-3"
@@ -213,10 +213,10 @@ const CheckoutPage = () => {
               {/* Delivery Details (if Delivery selected) */}
               {orderType === "delivery" && (
                 <div className="card border-0 shadow-sm rounded-4 p-4 bg-white mb-4">
-                  <h5 className="fw-bold text-dark mb-3">3. Delivery Destination</h5>
+                  <h5 className="fw-bold text-white mb-3">3. Delivery Destination</h5>
                   <div className="row g-3">
                     <div className="col-12">
-                      <label className="form-label small fw-bold">Delivery Zone / Location *</label>
+                      <label className="form-label small fw-bold text-muted">Delivery Zone / Location *</label>
                       <select
                         className="form-select rounded-3"
                         value={selectedZoneId}
@@ -230,7 +230,7 @@ const CheckoutPage = () => {
                       </select>
                     </div>
                     <div className="col-12">
-                      <label className="form-label small fw-bold">Street Address & Landmark *</label>
+                      <label className="form-label small fw-bold text-muted">Street Address &amp; Landmark *</label>
                       <textarea
                         className="form-control rounded-3"
                         rows="2"
@@ -241,7 +241,7 @@ const CheckoutPage = () => {
                       ></textarea>
                     </div>
                     <div className="col-md-6">
-                      <label className="form-label small fw-bold">City</label>
+                      <label className="form-label small fw-bold text-muted">City</label>
                       <input
                         type="text"
                         className="form-control rounded-3"
@@ -250,7 +250,7 @@ const CheckoutPage = () => {
                       />
                     </div>
                     <div className="col-md-6">
-                      <label className="form-label small fw-bold">State</label>
+                      <label className="form-label small fw-bold text-muted">State</label>
                       <input
                         type="text"
                         className="form-control rounded-3"
@@ -264,7 +264,7 @@ const CheckoutPage = () => {
 
               {/* Order Notes */}
               <div className="card border-0 shadow-sm rounded-4 p-4 bg-white mb-4">
-                <h5 className="fw-bold text-dark mb-2">Special Delivery / Food Instructions</h5>
+                <h5 className="fw-bold text-white mb-2">Special Delivery / Food Instructions</h5>
                 <p className="text-muted small mb-2">
                   Cake board message, spice level, or special packaging preferences.
                 </p>
@@ -279,14 +279,14 @@ const CheckoutPage = () => {
 
               {/* Payment Methods */}
               <div className="card border-0 shadow-sm rounded-4 p-4 bg-white mb-4">
-                <h5 className="fw-bold text-dark mb-3">4. Choose Payment Method</h5>
+                <h5 className="fw-bold text-white mb-3">4. Choose Payment Method</h5>
                 <div className="d-flex flex-column gap-3">
                   {/* Paystack Option */}
                   <label
-                    className={`p-3 rounded-3 border d-flex align-items-center justify-content-between cursor-pointer ${
+                    className={`p-3 rounded-3 border d-flex align-items-center justify-content-between cursor-pointer transition-all ${
                       paymentMethod === "Paystack"
                         ? "border-danger bg-danger bg-opacity-10"
-                        : "bg-white"
+                        : "bg-light"
                     }`}
                   >
                     <div className="d-flex align-items-center gap-3">
@@ -298,22 +298,22 @@ const CheckoutPage = () => {
                         onChange={() => setPaymentMethod("Paystack")}
                       />
                       <div>
-                        <strong className="text-dark d-block">Pay with Paystack (Debit Card / USSD / Transfer)</strong>
+                        <strong className="text-white d-block">Pay with Paystack (Debit Card / USSD / Transfer)</strong>
                         <small className="text-muted">Instant payment verification</small>
                       </div>
                     </div>
-                    <span className="badge bg-dark text-warning px-3 py-1">Paystack Secure</span>
+                    <span className="badge bg-secondary text-warning px-3 py-1">Paystack Secure</span>
                   </label>
 
                   {/* Bank Transfer Option */}
                   <label
-                    className={`p-3 rounded-3 border d-flex align-items-start justify-content-between cursor-pointer ${
+                    className={`p-3 rounded-3 border d-flex align-items-start justify-content-between cursor-pointer transition-all ${
                       paymentMethod === "Bank Transfer"
                         ? "border-danger bg-danger bg-opacity-10"
-                        : "bg-white"
+                        : "bg-light"
                     }`}
                   >
-                    <div className="d-flex align-items-start gap-3">
+                    <div className="d-flex align-items-start gap-3 w-100">
                       <input
                         type="radio"
                         name="paymentMethod"
@@ -321,25 +321,25 @@ const CheckoutPage = () => {
                         checked={paymentMethod === "Bank Transfer"}
                         onChange={() => setPaymentMethod("Bank Transfer")}
                       />
-                      <div>
-                        <strong className="text-dark d-block">Direct Bank Transfer</strong>
+                      <div className="flex-grow-1">
+                        <strong className="text-white d-block">Direct Bank Transfer</strong>
                         <small className="text-muted d-block mb-2">
                           Transfer directly to our official company account.
                         </small>
 
                         {paymentMethod === "Bank Transfer" && (
-                          <div className="p-3 bg-white border rounded-3 mt-2 small">
+                          <div className="p-3 bg-dark border border-secondary rounded-3 mt-2 small text-secondary">
                             <div className="mb-1">
-                              <strong>Bank:</strong> {bankDetails.bankName}
+                              <strong className="text-white">Bank:</strong> {bankDetails.bankName}
                             </div>
                             <div className="mb-1">
-                              <strong>Account Number:</strong>{" "}
+                              <strong className="text-white">Account Number:</strong>{" "}
                               <span className="font-monospace fw-bold text-danger fs-6">{bankDetails.accountNumber}</span>
                             </div>
                             <div className="mb-2">
-                              <strong>Account Name:</strong> {bankDetails.accountName}
+                              <strong className="text-white">Account Name:</strong> {bankDetails.accountName}
                             </div>
-                            <label className="form-label small fw-bold text-dark">
+                            <label className="form-label small fw-bold text-muted">
                               Transaction Reference / Sender Name:
                             </label>
                             <input
@@ -357,10 +357,10 @@ const CheckoutPage = () => {
 
                   {/* Cash on Delivery Option */}
                   <label
-                    className={`p-3 rounded-3 border d-flex align-items-center justify-content-between cursor-pointer ${
+                    className={`p-3 rounded-3 border d-flex align-items-center justify-content-between cursor-pointer transition-all ${
                       paymentMethod === "Cash on Delivery"
                         ? "border-danger bg-danger bg-opacity-10"
-                        : "bg-white"
+                        : "bg-light"
                     }`}
                   >
                     <div className="d-flex align-items-center gap-3">
@@ -372,7 +372,7 @@ const CheckoutPage = () => {
                         onChange={() => setPaymentMethod("Cash on Delivery")}
                       />
                       <div>
-                        <strong className="text-dark d-block">Cash on Delivery / Pickup</strong>
+                        <strong className="text-white d-block">Cash on Delivery / Pickup</strong>
                         <small className="text-muted">Pay in cash or POS on arrival</small>
                       </div>
                     </div>
@@ -385,7 +385,7 @@ const CheckoutPage = () => {
             {/* RIGHT COLUMN: ORDER SUMMARY */}
             <div className="col-lg-5">
               <div className="card border-0 shadow-sm rounded-4 p-4 bg-white sticky-top" style={{ top: "90px" }}>
-                <h4 className="fw-bold text-dark mb-3">Order Items ({cart.length})</h4>
+                <h4 className="fw-bold text-white mb-3">Order Items ({cart.length})</h4>
 
                 {/* Items Mini List */}
                 <div className="d-flex flex-column gap-3 mb-4 max-vh-40 overflow-auto">
@@ -399,32 +399,32 @@ const CheckoutPage = () => {
                           style={{ width: "45px", height: "45px" }}
                         />
                         <div>
-                          <span className="fw-semibold text-dark small d-block line-clamp-1">{item.name}</span>
+                          <span className="fw-semibold text-white small d-block line-clamp-1">{item.name}</span>
                           <span className="text-muted" style={{ fontSize: "11px" }}>
                             {item.quantity}x &bull; {item.variantName}
                           </span>
                         </div>
                       </div>
-                      <span className="fw-bold text-dark small">
+                      <span className="fw-bold text-white small">
                         {formatNaira(item.price * item.quantity)}
                       </span>
                     </div>
                   ))}
                 </div>
 
-                <hr className="my-3" />
+                <hr className="my-3 border-secondary" />
 
                 {/* Totals */}
                 <div className="d-flex justify-content-between mb-2">
                   <span className="text-muted">Subtotal:</span>
-                  <span className="fw-bold text-dark">{formatNaira(cartSubtotal)}</span>
+                  <span className="fw-bold text-white">{formatNaira(cartSubtotal)}</span>
                 </div>
 
                 <div className="d-flex justify-content-between mb-2">
                   <span className="text-muted">
                     {orderType === "pickup" ? "Pickup Fee:" : "Delivery Fee:"}
                   </span>
-                  <span className="fw-bold text-dark">
+                  <span className="fw-bold text-white">
                     {orderType === "pickup" ? "FREE" : formatNaira(deliveryFee)}
                   </span>
                 </div>
@@ -436,10 +436,10 @@ const CheckoutPage = () => {
                   </div>
                 )}
 
-                <hr className="my-3" />
+                <hr className="my-3 border-secondary" />
 
                 <div className="d-flex justify-content-between align-items-center mb-4">
-                  <span className="fs-5 fw-bold text-dark">Final Total:</span>
+                  <span className="fs-5 fw-bold text-white">Final Total:</span>
                   <span className="fs-2 fw-bold text-danger">{formatNaira(grandTotal)}</span>
                 </div>
 
@@ -478,7 +478,7 @@ const CheckoutPage = () => {
       <Modal show={showPaystackModal} onHide={() => setShowPaystackModal(false)} centered>
         <div className="modal-header border-0 pb-0">
           <div className="d-flex align-items-center gap-2">
-            <span className="badge bg-dark text-warning px-3 py-2 fw-bold">Paystack Checkout</span>
+            <span className="badge bg-secondary text-warning px-3 py-2 fw-bold">Paystack Checkout</span>
           </div>
           <button type="button" className="btn-close" onClick={() => setShowPaystackModal(false)}></button>
         </div>
@@ -487,11 +487,11 @@ const CheckoutPage = () => {
             <div className="rounded-circle bg-danger bg-opacity-10 text-danger d-inline-flex align-items-center justify-content-center p-3 mb-2">
               <i className="fa-solid fa-receipt fs-3"></i>
             </div>
-            <h5 className="fw-bold text-dark mb-1">GlozzyFoods ND More</h5>
+            <h5 className="fw-bold text-white mb-1">GlozzyFoods ND More</h5>
             <p className="text-muted small mb-0">{customerEmail || "orders@glozzyfoods.com"}</p>
           </div>
 
-          <div className="p-3 bg-light rounded-4 mb-4">
+          <div className="p-3 bg-light rounded-4 mb-4 border border-secondary">
             <span className="text-muted small d-block">Amount Due</span>
             <span className="fs-2 fw-bold text-danger">{formatNaira(grandTotal)}</span>
           </div>

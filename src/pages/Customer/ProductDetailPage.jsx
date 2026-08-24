@@ -139,7 +139,7 @@ const ProductDetailPage = () => {
           <div className="row g-5">
             {/* Gallery Column */}
             <div className="col-lg-6">
-              <div className="rounded-4 overflow-hidden border mb-3 position-relative" style={{ maxHeight: "450px" }}>
+              <div className="rounded-4 overflow-hidden border mb-3 position-relative bg-dark" style={{ maxHeight: "450px" }}>
                 <img
                   src={selectedImage || product.image}
                   alt={product.name}
@@ -161,7 +161,7 @@ const ProductDetailPage = () => {
                       key={idx}
                       type="button"
                       className={`btn p-0 rounded-3 border-2 overflow-hidden ${
-                        selectedImage === img ? "border-danger" : "border-transparent"
+                        selectedImage === img ? "border-danger" : "border-secondary"
                       }`}
                       style={{ width: "70px", height: "70px" }}
                       onClick={() => setSelectedImage(img)}
@@ -182,19 +182,19 @@ const ProductDetailPage = () => {
                 </span>
                 <div className="d-flex align-items-center gap-1 text-warning">
                   <i className="fa-solid fa-star"></i>
-                  <span className="text-dark fw-bold small">{product.rating || "5.0"}</span>
+                  <span className="text-white fw-bold small">{product.rating || "5.0"}</span>
                   <span className="text-muted small">({productReviews.length || product.reviewsCount || 10} reviews)</span>
                 </div>
               </div>
 
               {/* Title */}
-              <h1 className="fw-bold text-dark mb-2" style={{ fontSize: "28px" }}>
+              <h1 className="fw-bold text-white mb-2" style={{ fontSize: "28px" }}>
                 {product.name}
               </h1>
 
               {/* SKU & Stock */}
               <div className="d-flex align-items-center gap-3 text-muted small mb-3">
-                <span>SKU: <strong className="text-dark">{product.sku || "GLZ-FD-01"}</strong></span>
+                <span>SKU: <strong className="text-white">{product.sku || "GLZ-FD-01"}</strong></span>
                 <span>&bull;</span>
                 {isOutOfStock ? (
                   <span className="text-danger fw-bold"><i className="fa-solid fa-circle-xmark me-1"></i> Out of Stock</span>
@@ -204,7 +204,7 @@ const ProductDetailPage = () => {
               </div>
 
               {/* Price Display */}
-              <div className="d-flex align-items-baseline gap-3 mb-4 p-3 rounded-3 bg-light">
+              <div className="d-flex align-items-baseline gap-3 mb-4 p-3 rounded-3 bg-light border">
                 <span className="fs-2 fw-bold text-danger">
                   {formatNaira(currentPrice)}
                 </span>
@@ -228,7 +228,7 @@ const ProductDetailPage = () => {
               {/* Dynamic Variants Picker */}
               {product.variants && product.variants.length > 0 && (
                 <div className="mb-4">
-                  <label className="form-label fw-bold text-dark mb-2">
+                  <label className="form-label fw-bold text-white mb-2">
                     Choose {product.variants[0]?.name || "Size / Portion"}:
                   </label>
                   <div className="d-flex flex-wrap gap-2">
@@ -253,7 +253,7 @@ const ProductDetailPage = () => {
               {/* Quantity Selector & Wishlist */}
               <div className="d-flex align-items-center gap-3 mb-4">
                 <div className="d-flex align-items-center">
-                  <span className="fw-bold small text-dark me-2">Quantity:</span>
+                  <span className="fw-bold small text-white me-2">Quantity:</span>
                   <div className="input-group" style={{ width: "130px" }}>
                     <button
                       type="button"
@@ -264,7 +264,7 @@ const ProductDetailPage = () => {
                     </button>
                     <input
                       type="text"
-                      className="form-control text-center fw-bold bg-white"
+                      className="form-control text-center fw-bold"
                       readOnly
                       value={quantity}
                     />
@@ -328,11 +328,11 @@ const ProductDetailPage = () => {
               <div className="p-3 rounded-3 bg-light border small text-muted d-flex flex-column gap-2">
                 <div className="d-flex align-items-center gap-2">
                   <i className="fa-solid fa-clock text-danger"></i>
-                  <span>Prep time: <strong>{product.preparationTime || "25 - 45 Minutes"}</strong></span>
+                  <span>Prep time: <strong className="text-white">{product.preparationTime || "25 - 45 Minutes"}</strong></span>
                 </div>
                 <div className="d-flex align-items-center gap-2">
                   <i className="fa-solid fa-shield-halved text-success"></i>
-                  <span>100% Homemade, Safe & Hygienic Kitchen Preparation</span>
+                  <span>100% Homemade, Safe &amp; Hygienic Kitchen Preparation</span>
                 </div>
                 <div className="d-flex align-items-center gap-2">
                   <i className="fa-solid fa-truck text-warning"></i>
@@ -349,7 +349,7 @@ const ProductDetailPage = () => {
             <li className="nav-item">
               <button
                 type="button"
-                className={`nav-link rounded-pill px-4 ${activeTab === "desc" ? "active bg-danger" : "text-dark"}`}
+                className={`nav-link rounded-pill px-4 ${activeTab === "desc" ? "active bg-danger" : ""}`}
                 onClick={() => setActiveTab("desc")}
               >
                 Description
@@ -358,16 +358,16 @@ const ProductDetailPage = () => {
             <li className="nav-item">
               <button
                 type="button"
-                className={`nav-link rounded-pill px-4 ${activeTab === "ingredients" ? "active bg-danger" : "text-dark"}`}
+                className={`nav-link rounded-pill px-4 ${activeTab === "ingredients" ? "active bg-danger" : ""}`}
                 onClick={() => setActiveTab("ingredients")}
               >
-                Ingredients & Allergens
+                Ingredients &amp; Allergens
               </button>
             </li>
             <li className="nav-item">
               <button
                 type="button"
-                className={`nav-link rounded-pill px-4 ${activeTab === "reviews" ? "active bg-danger" : "text-dark"}`}
+                className={`nav-link rounded-pill px-4 ${activeTab === "reviews" ? "active bg-danger" : ""}`}
                 onClick={() => setActiveTab("reviews")}
               >
                 Customer Reviews ({productReviews.length})
@@ -378,12 +378,12 @@ const ProductDetailPage = () => {
           <div className="tab-content">
             {activeTab === "desc" && (
               <div>
-                <h5 className="fw-bold text-dark mb-3">About this Delicacy</h5>
+                <h5 className="fw-bold text-white mb-3">About this Delicacy</h5>
                 <p className="text-muted" style={{ lineHeight: "1.8" }}>
                   {product.description}
                 </p>
-                <div className="mt-4 p-3 bg-light rounded-3">
-                  <h6 className="fw-bold text-dark">Special Instructions for Cakes & Trays:</h6>
+                <div className="mt-4 p-3 bg-light rounded-3 border">
+                  <h6 className="fw-bold text-white">Special Instructions for Cakes &amp; Trays:</h6>
                   <p className="small text-muted mb-0">
                     Need custom writing on the cake, specific spice levels, or custom catering packings? You can include your special requests in the checkout notes or chat with us on WhatsApp!
                   </p>
@@ -393,7 +393,7 @@ const ProductDetailPage = () => {
 
             {activeTab === "ingredients" && (
               <div>
-                <h5 className="fw-bold text-dark mb-3">Ingredients & Food Safety</h5>
+                <h5 className="fw-bold text-white mb-3">Ingredients &amp; Food Safety</h5>
                 <div className="row g-4">
                   <div className="col-md-6">
                     <div className="p-3 rounded-3 bg-light border">
@@ -407,7 +407,7 @@ const ProductDetailPage = () => {
                   </div>
                   <div className="col-md-6">
                     <div className="p-3 rounded-3 bg-light border">
-                      <h6 className="fw-bold text-warning text-dark mb-2">
+                      <h6 className="fw-bold text-warning mb-2">
                         <i className="fa-solid fa-triangle-exclamation text-warning me-2"></i> Allergen Information:
                       </h6>
                       <p className="text-muted small mb-0">
@@ -423,7 +423,7 @@ const ProductDetailPage = () => {
               <div>
                 <div className="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
                   <div>
-                    <h5 className="fw-bold text-dark mb-0">Customer Feedback</h5>
+                    <h5 className="fw-bold text-white mb-0">Customer Feedback</h5>
                     <small className="text-muted">Real reviews from verified food lovers</small>
                   </div>
                   <button
@@ -442,7 +442,7 @@ const ProductDetailPage = () => {
                     {productReviews.map((rev) => (
                       <div className="p-3 rounded-3 bg-light border" key={rev.id}>
                         <div className="d-flex justify-content-between align-items-center mb-2">
-                          <span className="fw-bold text-dark">{rev.customerName}</span>
+                          <span className="fw-bold text-white">{rev.customerName}</span>
                           <span className="text-muted small">{rev.date}</span>
                         </div>
                         <div className="text-warning small mb-2">
@@ -464,7 +464,7 @@ const ProductDetailPage = () => {
         {relatedProducts.length > 0 && (
           <div className="mb-4">
             <div className="d-flex justify-content-between align-items-center mb-4">
-              <h3 className="fw-bold text-dark mb-0">You Might Also Love</h3>
+              <h3 className="fw-bold text-white mb-0">You Might Also Love</h3>
               <Link to="/shop" className="text-danger fw-semibold text-decoration-none small">
                 View All &rarr;
               </Link>
@@ -483,13 +483,13 @@ const ProductDetailPage = () => {
       {/* Review Modal */}
       <Modal show={showReviewModal} onHide={() => setShowReviewModal(false)} centered>
         <div className="modal-header border-0 pb-0">
-          <h5 className="modal-title fw-bold text-dark">Review {product.name}</h5>
+          <h5 className="modal-title fw-bold text-white">Review {product.name}</h5>
           <button type="button" className="btn-close" onClick={() => setShowReviewModal(false)}></button>
         </div>
         <form onSubmit={handleReviewSubmit}>
           <div className="modal-body">
             <div className="mb-3">
-              <label className="form-label small fw-bold">Your Name</label>
+              <label className="form-label small fw-bold text-muted">Your Name</label>
               <input
                 type="text"
                 className="form-control rounded-3"
@@ -500,7 +500,7 @@ const ProductDetailPage = () => {
               />
             </div>
             <div className="mb-3">
-              <label className="form-label small fw-bold">Rating (Stars)</label>
+              <label className="form-label small fw-bold text-muted">Rating (Stars)</label>
               <select
                 className="form-select rounded-3"
                 value={reviewRating}
@@ -514,7 +514,7 @@ const ProductDetailPage = () => {
               </select>
             </div>
             <div className="mb-3">
-              <label className="form-label small fw-bold">Your Review & Taste Experience</label>
+              <label className="form-label small fw-bold text-muted">Your Review &amp; Taste Experience</label>
               <textarea
                 className="form-control rounded-3"
                 rows="4"
@@ -526,7 +526,7 @@ const ProductDetailPage = () => {
             </div>
           </div>
           <div className="modal-footer border-0">
-            <button type="button" className="btn btn-light rounded-pill" onClick={() => setShowReviewModal(false)}>
+            <button type="button" className="btn btn-outline-secondary rounded-pill" onClick={() => setShowReviewModal(false)}>
               Cancel
             </button>
             <button type="submit" className="btn btn-glozzy-primary rounded-pill px-4">

@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { useStore } from "../../context/StoreContext";
 
-const CustomerProfilePage = () => {
+const AccountPage = () => {
   const navigate = useNavigate();
   const { currentUser, logout, updateProfile, isAdmin } = useAuth();
   const { orders, formatNaira, addToCart, products } = useStore();
@@ -265,4 +265,4 @@ const CustomerProfilePage = () => {
   );
 };
 
-export default CustomerProfilePage;
+export default AccountPage;

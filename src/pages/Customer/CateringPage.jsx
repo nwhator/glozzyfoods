@@ -110,21 +110,27 @@ const CateringPage = () => {
   return (
     <div className="py-5">
       <div className="container">
-        {/* HERO BANNER */}
-        <div className="card bg-danger text-white border-0 rounded-4 overflow-hidden shadow-lg mb-5">
+        {/* HERO BANNER - DARK GRADIENT */}
+        <div
+          className="card text-white border-0 rounded-4 overflow-hidden shadow-lg mb-5"
+          style={{
+            background: "linear-gradient(135deg, var(--g-bg-card) 0%, var(--g-bg-elevated) 100%)",
+            border: "1px solid var(--g-border)",
+          }}
+        >
           <div className="row g-0 align-items-center">
             <div className="col-lg-7 p-4 p-md-5">
-              <span className="badge bg-warning text-dark fw-bold px-3 py-2 rounded-pill mb-3">
+              <span className="badge bg-danger bg-opacity-10 text-danger fw-bold px-3 py-2 rounded-pill mb-3 border border-danger border-opacity-25">
                 Events & Catering Services
               </span>
-              <h1 className="fw-bold mb-3" style={{ fontSize: "36px" }}>
+              <h1 className="fw-bold text-white mb-3" style={{ fontSize: "36px" }}>
                 Make Your Event Unforgettable With GlozzyFoods Catering
               </h1>
-              <p className="text-white-50 mb-4" style={{ fontSize: "16px", lineHeight: "1.6" }}>
+              <p className="text-muted mb-4" style={{ fontSize: "16px", lineHeight: "1.6" }}>
                 From weddings, birthdays, and anniversaries to corporate lunches and intimate family feasts. We deliver authentic Nigerian dishes, crispy party small chops, and bespoke celebration cakes.
               </p>
               <div className="d-flex align-items-center gap-3 flex-wrap">
-                <a href="#quote-calculator" className="btn btn-warning text-dark fw-bold rounded-pill px-4 py-2">
+                <a href="#quote-calculator" className="btn btn-glozzy-primary rounded-pill px-4 py-2">
                   <i className="fa-solid fa-calculator me-2"></i> Calculate Catering Quote
                 </a>
                 <a
@@ -133,7 +139,7 @@ const CateringPage = () => {
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn btn-outline-light rounded-pill px-4 py-2"
+                  className="btn btn-glozzy-whatsapp rounded-pill px-4 py-2"
                 >
                   <i className="fa-brands fa-whatsapp me-2"></i> Chat With Chef
                 </a>
@@ -187,9 +193,9 @@ const CateringPage = () => {
                     </p>
                     <ul className="list-unstyled small text-muted mb-4 flex-grow-1">
                       {pkg.features.map((f, i) => (
-                        <li key={i} className="mb-1">
-                          <i className="fa-solid fa-check text-success me-2"></i>
-                          {f}
+                        <li key={i} className="mb-1 d-flex align-items-center">
+                          <i className="fa-solid fa-check text-success me-2 flex-shrink-0"></i>
+                          <span>{f}</span>
                         </li>
                       ))}
                     </ul>
@@ -255,8 +261,9 @@ const CateringPage = () => {
                     <label
                       key={pkg.id}
                       className={`p-3 rounded-3 border d-flex align-items-center justify-content-between cursor-pointer ${
-                        selectedPkgId === pkg.id ? "border-danger bg-danger bg-opacity-10" : "bg-white"
+                        selectedPkgId === pkg.id ? "border-danger bg-danger bg-opacity-10" : "bg-dark"
                       }`}
+                      style={{ cursor: "pointer" }}
                     >
                       <div className="d-flex align-items-center gap-3">
                         <input
@@ -282,7 +289,10 @@ const CateringPage = () => {
               <div className="mb-4">
                 <label className="form-label fw-bold text-dark mb-2">Optional Add-ons:</label>
                 <div className="d-flex flex-column gap-2">
-                  <label className="p-3 rounded-3 border d-flex align-items-center justify-content-between bg-light cursor-pointer">
+                  <label
+                    className="p-3 rounded-3 border d-flex align-items-center justify-content-between bg-dark"
+                    style={{ cursor: "pointer" }}
+                  >
                     <div className="d-flex align-items-center gap-3">
                       <input
                         type="checkbox"
@@ -299,7 +309,10 @@ const CateringPage = () => {
                     </div>
                   </label>
 
-                  <label className="p-3 rounded-3 border d-flex align-items-center justify-content-between bg-light cursor-pointer">
+                  <label
+                    className="p-3 rounded-3 border d-flex align-items-center justify-content-between bg-dark"
+                    style={{ cursor: "pointer" }}
+                  >
                     <div className="d-flex align-items-center gap-3">
                       <input
                         type="checkbox"
@@ -337,7 +350,7 @@ const CateringPage = () => {
                     <span className="fw-bold text-dark">{formatNaira(cakeCost)}</span>
                   </div>
                 )}
-                <div className="d-flex justify-content-between align-items-center border-top pt-2 mt-2">
+                <div className="d-flex justify-content-between align-items-center border-top border-danger border-opacity-25 pt-2 mt-2">
                   <span className="fw-bold text-dark fs-5">Estimated Total:</span>
                   <span className="fw-bold text-danger fs-3">{formatNaira(estimatedTotal)}</span>
                 </div>
@@ -430,14 +443,14 @@ const CateringPage = () => {
                   </div>
 
                   <div className="d-flex flex-column gap-2">
-                    <button type="submit" className="btn btn-glozzy-primary btn-lg w-100 py-3 shadow-sm">
+                    <button type="submit" className="btn btn-glozzy-primary btn-lg w-100 py-3 shadow-sm rounded-pill">
                       Submit Catering Inquiry
                     </button>
                     <a
                       href={whatsappInquiryUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="btn btn-glozzy-whatsapp btn-lg w-100 py-3"
+                      className="btn btn-glozzy-whatsapp btn-lg w-100 py-3 rounded-pill"
                     >
                       <i className="fa-brands fa-whatsapp me-2"></i> Send Quote Directly on WhatsApp
                     </a>
@@ -445,6 +458,32 @@ const CateringPage = () => {
                 </form>
               )}
             </div>
+          </div>
+        </div>
+
+        {/* CTA BANNER */}
+        <div className="card bg-danger text-white rounded-4 p-4 p-md-5 text-center border-0 shadow-lg">
+          <h3 className="fw-bold mb-2">Have Custom Catering Requirements?</h3>
+          <p className="text-white-50 mx-auto mb-4" style={{ maxWidth: "550px", fontSize: "15px" }}>
+            Speak directly with our head culinary planner to customize a bespoke menu for weddings, executive luncheons, or anniversary celebrations.
+          </p>
+          <div className="d-flex justify-content-center gap-3 flex-wrap">
+            <a
+              href={`https://wa.me/${whatsappPhone}?text=${encodeURIComponent(
+                "Hello GlozzyFoods Head Chef, I want to discuss a custom event catering menu."
+              )}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-warning text-dark fw-bold btn-lg px-4 rounded-pill"
+            >
+              <i className="fa-brands fa-whatsapp me-2"></i> Chat with Head Chef
+            </a>
+            <a
+              href="#quote-calculator"
+              className="btn btn-outline-light btn-lg px-4 rounded-pill"
+            >
+              <i className="fa-solid fa-calculator me-2"></i> Recalculate Estimate
+            </a>
           </div>
         </div>
       </div>

@@ -48,13 +48,13 @@ const CategoryPage = () => {
         </nav>
 
         {/* Category Hero Banner */}
-        <div className="card bg-danger text-white border-0 rounded-4 overflow-hidden shadow-sm mb-5">
+        <div className="card bg-danger text-white border-0 rounded-4 overflow-hidden shadow-sm mb-5 position-relative">
           <div className="row g-0 align-items-center">
             <div className="col-md-8 p-4 p-md-5">
               <span className="badge bg-warning text-dark fw-bold px-3 py-1 mb-2">
                 Food Category
               </span>
-              <h1 className="fw-bold mb-2">{category.name}</h1>
+              <h1 className="fw-bold text-white mb-2">{category.name}</h1>
               <p className="text-white-50 mb-0" style={{ maxWidth: "550px", fontSize: "16px" }}>
                 {category.description}
               </p>
@@ -64,15 +64,15 @@ const CategoryPage = () => {
                 src={category.image}
                 alt={category.name}
                 className="w-100 object-fit-cover"
-                style={{ height: "200px" }}
+                style={{ height: "220px" }}
               />
             </div>
           </div>
         </div>
 
         {/* Category Products */}
-        <div className="d-flex justify-content-between align-items-center mb-4">
-          <h3 className="fw-bold text-dark mb-0">All {category.name} ({categoryProducts.length})</h3>
+        <div className="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+          <h3 className="fw-bold text-white mb-0">All {category.name} ({categoryProducts.length})</h3>
           <Link to="/shop" className="btn btn-outline-danger btn-sm rounded-pill px-3">
             &larr; Back to Full Menu
           </Link>

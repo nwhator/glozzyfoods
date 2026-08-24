@@ -80,14 +80,14 @@ const OrderTrackingPage = () => {
           <span className="badge bg-danger bg-opacity-10 text-danger px-3 py-2 rounded-pill fw-bold mb-2">
             Live Dispatch Tracking
           </span>
-          <h1 className="fw-bold text-dark">Track Your GlozzyFoods Order</h1>
+          <h1 className="fw-bold text-white mb-2">Track Your GlozzyFoods Order</h1>
           <p className="text-muted small">
-            Enter your order number (e.g. <strong>GF-849201</strong>) to view real-time preparation and delivery updates.
+            Enter your order number (e.g. <strong className="text-white">GF-849201</strong>) to view real-time preparation and delivery updates.
           </p>
         </div>
 
         {/* Search Input Box */}
-        <div className="card border-0 shadow-sm rounded-4 p-3 bg-white mb-4">
+        <div className="card border-0 shadow-sm rounded-4 p-3 bg-card mb-4">
           <form onSubmit={handleSearch} className="d-flex gap-2">
             <input
               type="text"
@@ -110,14 +110,14 @@ const OrderTrackingPage = () => {
 
         {/* Order Details & Timeline Display */}
         {activeOrder && (
-          <div className="card border-0 shadow-sm rounded-4 p-4 p-md-5 bg-white mb-4">
+          <div className="card border-0 shadow-sm rounded-4 p-4 p-md-5 bg-card mb-4">
             {/* Header info */}
             <div className="d-flex justify-content-between align-items-center flex-wrap gap-2 border-bottom pb-3 mb-4">
               <div>
-                <span className="text-muted small">Order Number</span>
+                <span className="text-muted small d-block">Order Number</span>
                 <h4 className="fw-bold text-danger mb-0 font-monospace">{activeOrder.orderNumber}</h4>
               </div>
-              <div className="text-end">
+              <div className="text-md-end">
                 <span className="badge bg-warning text-dark px-3 py-2 rounded-pill fw-bold">
                   Status: {activeOrder.orderStatus}
                 </span>
@@ -129,13 +129,13 @@ const OrderTrackingPage = () => {
 
             {/* VISUAL TIMELINE */}
             {activeOrder.orderStatus === "Cancelled" ? (
-              <div className="alert alert-danger text-center rounded-4 py-3 mb-4">
-                <i className="fa-solid fa-ban fs-4 d-block mb-1"></i>
-                <h5 className="fw-bold mb-1">This order has been cancelled</h5>
-                <small>Please contact our support team on WhatsApp for any refund or enquiry.</small>
+              <div className="alert alert-danger text-center rounded-4 py-4 mb-4">
+                <i className="fa-solid fa-ban fs-3 d-block mb-2 text-danger"></i>
+                <h5 className="fw-bold mb-1 text-white">This order has been cancelled</h5>
+                <small className="text-muted">Please contact our support team on WhatsApp for any refund or enquiry.</small>
               </div>
             ) : (
-              <div className="my-4">
+              <div className="my-4 py-2">
                 <div className="glozzy-timeline">
                   {STATUS_STEPS.map((step) => {
                     const statusClass = getStepStatus(step.id, activeOrder.orderStatus);
@@ -153,10 +153,10 @@ const OrderTrackingPage = () => {
             )}
 
             {/* Internal / Dispatch Message */}
-            <div className="p-3 rounded-4 bg-light border mb-4">
+            <div className="p-3 rounded-4 bg-elevated border mb-4">
               <div className="d-flex align-items-center gap-2 mb-1">
                 <i className="fa-solid fa-circle-info text-danger"></i>
-                <strong className="text-dark small">Kitchen & Dispatch Update:</strong>
+                <strong className="text-white small">Kitchen & Dispatch Update:</strong>
               </div>
               <p className="text-muted small mb-0">
                 {activeOrder.internalNotes || "Your order has been logged and is progressing according to schedule."}
@@ -166,42 +166,47 @@ const OrderTrackingPage = () => {
             {/* Recipient & Items Summary */}
             <div className="row g-4 mb-4 small">
               <div className="col-md-6">
-                <div className="p-3 bg-light rounded-3 border h-100">
-                  <h6 className="fw-bold text-dark mb-2">
-                    <i className="fa-solid fa-location-dot text-danger me-1"></i> Delivery Information
+                <div className="p-3 bg-elevated rounded-4 border h-100">
+                  <h6 className="fw-bold text-white mb-2 d-flex align-items-center gap-2">
+                    <i className="fa-solid fa-location-dot text-danger"></i> Delivery Information
                   </h6>
-                  <div><strong>Customer:</strong> {activeOrder.customerName}</div>
-                  <div><strong>Phone:</strong> {activeOrder.customerPhone}</div>
-                  <div><strong>Zone:</strong> {activeOrder.deliveryZone}</div>
-                  <div><strong>Address:</strong> {activeOrder.deliveryAddress}</div>
+                  <div className="text-muted mb-1"><strong className="text-white">Customer:</strong> {activeOrder.customerName}</div>
+                  <div className="text-muted mb-1"><strong className="text-white">Phone:</strong> {activeOrder.customerPhone}</div>
+                  <div className="text-muted mb-1"><strong className="text-white">Zone:</strong> {activeOrder.deliveryZone}</div>
+                  <div className="text-muted"><strong className="text-white">Address:</strong> {activeOrder.deliveryAddress}</div>
                 </div>
               </div>
               <div className="col-md-6">
-                <div className="p-3 bg-light rounded-3 border h-100">
-                  <h6 className="fw-bold text-dark mb-2">
-                    <i className="fa-solid fa-wallet text-danger me-1"></i> Payment & Summary
+                <div className="p-3 bg-elevated rounded-4 border h-100">
+                  <h6 className="fw-bold text-white mb-2 d-flex align-items-center gap-2">
+                    <i className="fa-solid fa-wallet text-danger"></i> Payment & Summary
                   </h6>
-                  <div><strong>Payment Method:</strong> {activeOrder.paymentMethod}</div>
-                  <div><strong>Payment Status:</strong> <span className="badge bg-success bg-opacity-10 text-success">{activeOrder.paymentStatus}</span></div>
-                  <div><strong>Reference:</strong> <span className="font-monospace">{activeOrder.paymentReference}</span></div>
-                  <div className="mt-1"><strong>Total Amount:</strong> <span className="fw-bold text-danger fs-6">{formatNaira(activeOrder.total)}</span></div>
+                  <div className="text-muted mb-1"><strong className="text-white">Payment Method:</strong> {activeOrder.paymentMethod}</div>
+                  <div className="text-muted mb-1"><strong className="text-white">Payment Status:</strong> <span className="badge bg-success bg-opacity-10 text-success rounded-pill px-2 py-1">{activeOrder.paymentStatus}</span></div>
+                  <div className="text-muted mb-1"><strong className="text-white">Reference:</strong> <span className="font-monospace text-danger">{activeOrder.paymentReference}</span></div>
+                  <div className="mt-2 pt-2 border-top"><strong className="text-white">Total Amount:</strong> <span className="fw-bold text-danger fs-6 ms-1">{formatNaira(activeOrder.total)}</span></div>
                 </div>
               </div>
             </div>
 
             {/* Items List */}
-            <h6 className="fw-bold text-dark mb-3">Dishes in this Order ({activeOrder.items?.length || 0})</h6>
+            <h6 className="fw-bold text-white mb-3">Dishes in this Order ({activeOrder.items?.length || 0})</h6>
             <div className="d-flex flex-column gap-2 mb-4">
               {activeOrder.items?.map((item, idx) => (
-                <div className="d-flex justify-content-between align-items-center p-2 rounded-3 border bg-white" key={idx}>
-                  <div className="d-flex align-items-center gap-2">
-                    <img src={item.image} alt={item.productName} className="rounded-2 object-fit-cover" style={{ width: "38px", height: "38px" }} />
+                <div className="d-flex justify-content-between align-items-center p-3 rounded-3 border bg-elevated" key={idx}>
+                  <div className="d-flex align-items-center gap-3">
+                    <img
+                      src={item.image}
+                      alt={item.productName}
+                      className="rounded-3 object-fit-cover border"
+                      style={{ width: "42px", height: "42px" }}
+                    />
                     <div>
-                      <strong className="text-dark small d-block">{item.productName}</strong>
+                      <strong className="text-white small d-block">{item.productName}</strong>
                       <small className="text-muted">{item.variantName} &bull; Qty: {item.quantity}</small>
                     </div>
                   </div>
-                  <span className="fw-bold text-dark small">{formatNaira(item.price * item.quantity)}</span>
+                  <span className="fw-bold text-white small">{formatNaira(item.price * item.quantity)}</span>
                 </div>
               ))}
             </div>

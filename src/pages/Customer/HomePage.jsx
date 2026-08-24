@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useStore } from "../../context/StoreContext";
 import ProductCard from "../../components/Common/ProductCard";
 import QuickViewModal from "../../components/Common/QuickViewModal";
@@ -7,18 +7,29 @@ import QuickViewModal from "../../components/Common/QuickViewModal";
 const HomePage = () => {
   const { categories, products, cms } = useStore();
   const [selectedCategoryTab, setSelectedCategoryTab] = useState("all");
+  const [searchQuery, setSearchQuery] = useState("");
   const [quickViewProduct, setQuickViewProduct] = useState(null);
+  const navigate = useNavigate();
 
   const hero = cms?.hero || {
     tagline: "Authentic Nigerian Dishes & Handcrafted Confectioneries",
-    title: "Great Food. Great Taste. Every Time.",
+    title: "Delicious Food, Delivered In Minutes.",
     highlightText: "GlozzyFoods ND More",
     description:
-      "Fresh African dishes, delicious confectionery cakes, crispy small chops, refreshing chilled drinks and artisan fruit parfaits made with care in Benin City.",
-    primaryCtaText: "Order Online Now",
-    secondaryCtaText: "Explore Full Menu",
+      "Fresh African dishes, celebration cakes, crispy small chops, refreshing chilled drinks and artisan fruit parfaits made with passion in Benin City.",
+    primaryCtaText: "Explore Full Menu",
+    secondaryCtaText: "Event Catering",
     bannerImage:
       "https://images.unsplash.com/photo-1586788680434-30d324b2d46f?auto=format&fit=crop&w=1000&q=80",
+  };
+
+  const handleHeroSearch = (e) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/shop?search=${encodeURIComponent(searchQuery.trim())}`);
+    } else {
+      navigate("/shop");
+    }
   };
 
   // Filter dishes by category tab
@@ -37,19 +48,49 @@ const HomePage = () => {
         <div className="container">
           <div className="row align-items-center g-4 g-lg-5">
             <div className="col-lg-6">
+              {/* Micro-Pill Tag */}
               <div className="glozzy-hero-tag mb-3">
-                <i className="fa-solid fa-fire text-danger"></i>
+                <span className="badge bg-danger rounded-pill px-2 py-1 me-1 text-white" style={{ fontSize: "10px" }}>
+                  BENIN CITY
+                </span>
                 <span>{hero.tagline}</span>
               </div>
+
+              {/* Headline */}
               <h1 className="glozzy-hero-title mb-3">
-                {hero.title} <br />
-                <span className="text-danger">{hero.highlightText}</span>
+                Have delicious food <br />
+                <span className="text-danger">delivered to your doorstep.</span>
               </h1>
               <p className="glozzy-hero-desc mb-4">{hero.description}</p>
+
+              {/* Instant Search Bar */}
+              <form onSubmit={handleHeroSearch} className="mb-4">
+                <div
+                  className="bg-white p-2 rounded-pill shadow-sm border d-flex align-items-center gap-2"
+                  style={{ maxWidth: "520px" }}
+                >
+                  <div className="ps-3 text-danger fs-5">
+                    <i className="fa-solid fa-magnifying-glass"></i>
+                  </div>
+                  <input
+                    type="text"
+                    className="form-control border-0 shadow-none px-2 text-white"
+                    placeholder="Search cakes, jollof, small chops, soups..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    style={{ fontSize: "15px", background: "transparent" }}
+                  />
+                  <button type="submit" className="btn btn-glozzy-primary rounded-pill px-4 py-2">
+                    Search Menu
+                  </button>
+                </div>
+              </form>
+
+              {/* Quick Actions */}
               <div className="d-flex align-items-center gap-3 flex-wrap mb-4">
-                <Link to="/shop" className="btn btn-glozzy-primary btn-lg shadow-sm">
+                <Link to="/shop" className="btn btn-glozzy-primary shadow-sm">
                   <i className="fa-solid fa-utensils me-2"></i>
-                  {hero.primaryCtaText}
+                  Full Menu Catalogue
                 </Link>
                 <a
                   href={`https://wa.me/${whatsappPhone}?text=${encodeURIComponent(
@@ -57,30 +98,30 @@ const HomePage = () => {
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn btn-glozzy-whatsapp btn-lg shadow-sm"
+                  className="btn btn-glozzy-whatsapp shadow-sm"
                 >
-                  <i className="fa-brands fa-whatsapp me-2"></i> Quick WhatsApp
+                  <i className="fa-brands fa-whatsapp me-2"></i> Order on WhatsApp
                 </a>
               </div>
 
               {/* Service micro-tags */}
-              <div className="d-flex align-items-center gap-4 pt-3 border-top border-secondary border-opacity-10 flex-wrap">
+              <div className="d-flex align-items-center gap-4 pt-3 border-top flex-wrap">
                 <div className="d-flex align-items-center gap-2">
                   <i className="fa-solid fa-circle-check text-success"></i>
                   <span className="small fw-semibold text-dark">Freshly Cooked</span>
                 </div>
                 <div className="d-flex align-items-center gap-2">
-                  <i className="fa-solid fa-truck-fast text-danger"></i>
-                  <span className="small fw-semibold text-dark">Fast Delivery in Benin</span>
+                  <i className="fa-solid fa-bolt text-warning"></i>
+                  <span className="small fw-semibold text-dark">Fast Dispatch</span>
                 </div>
                 <div className="d-flex align-items-center gap-2">
                   <i className="fa-solid fa-star text-warning"></i>
-                  <span className="small fw-semibold text-dark">Top Quality</span>
+                  <span className="small fw-semibold text-dark">4.9/5 Rating</span>
                 </div>
               </div>
             </div>
 
-            {/* Hero Image Box */}
+            {/* Hero Image Box with Dark Glass Floating Chips */}
             <div className="col-lg-6">
               <div className="glozzy-hero-img-box position-relative">
                 <img
@@ -91,22 +132,66 @@ const HomePage = () => {
                   alt="GlozzyFoods Delicacies"
                   className="glozzy-hero-main-img shadow-lg"
                 />
+
+                {/* Floating Chip 1: Speed */}
+                <div
+                  className="position-absolute top-0 end-0 m-3 p-3 rounded-4 shadow-lg d-none d-sm-flex align-items-center gap-3"
+                  style={{
+                    background: "rgba(28,28,28,0.9)",
+                    backdropFilter: "blur(12px)",
+                    border: "1px solid var(--g-border)",
+                    transform: "translateY(-10px)",
+                  }}
+                >
+                  <div
+                    className="rounded-circle bg-danger bg-opacity-10 text-danger d-flex align-items-center justify-content-center"
+                    style={{ width: "42px", height: "42px", fontSize: "18px" }}
+                  >
+                    <i className="fa-solid fa-motorcycle"></i>
+                  </div>
+                  <div>
+                    <strong className="d-block text-dark small">Fast Delivery</strong>
+                    <small className="text-muted">Benin Citywide</small>
+                  </div>
+                </div>
+
+                {/* Floating Chip 2: Quality */}
+                <div
+                  className="position-absolute bottom-0 start-0 m-3 p-3 rounded-4 shadow-lg d-none d-sm-flex align-items-center gap-3"
+                  style={{
+                    background: "rgba(28,28,28,0.9)",
+                    backdropFilter: "blur(12px)",
+                    border: "1px solid var(--g-border)",
+                    transform: "translateY(10px)",
+                  }}
+                >
+                  <div
+                    className="rounded-circle bg-warning bg-opacity-10 text-warning d-flex align-items-center justify-content-center"
+                    style={{ width: "42px", height: "42px", fontSize: "18px" }}
+                  >
+                    <i className="fa-solid fa-heart text-danger"></i>
+                  </div>
+                  <div>
+                    <strong className="d-block text-dark small">100% Homemade Taste</strong>
+                    <small className="text-muted">Over 1,000+ Happy Foodies</small>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 2. CATEGORIES SECTION */}
+      {/* 2. CATEGORY ROW */}
       <section className="py-5 bg-white">
         <div className="container">
           <div className="d-flex justify-content-between align-items-end mb-4 flex-wrap gap-2">
             <div>
-              <span className="text-danger fw-bold small text-uppercase">Explore Menu</span>
-              <h3 className="fw-bold text-dark mb-0">Browse By Category</h3>
+              <span className="text-danger fw-bold small text-uppercase">Categories</span>
+              <h3 className="fw-bold text-dark mb-0">What are you craving?</h3>
             </div>
-            <Link to="/shop" className="btn btn-outline-danger btn-sm rounded-pill px-3">
-              View All <i className="fa-solid fa-arrow-right ms-1"></i>
+            <Link to="/shop" className="btn btn-outline-danger btn-sm rounded-pill px-3 fw-semibold">
+              View All Menu &rarr;
             </Link>
           </div>
 
@@ -127,34 +212,33 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* 3. FEATURED PRODUCTS SECTION (CUSTOMER FAVOURITES) */}
+      {/* 3. FEATURED PRODUCTS GRID */}
       <section className="py-5 bg-light">
         <div className="container">
-          <div className="text-center mb-4">
-            <span className="badge bg-danger bg-opacity-10 text-danger rounded-pill px-3 py-2 fw-bold mb-2">
-              Top Customer Favourites
-            </span>
-            <h2 className="fw-bold text-dark">Popular Dishes & Treats</h2>
-            <p className="text-muted small mx-auto" style={{ maxWidth: "500px" }}>
-              Freshly prepared upon order with authentic recipes and high quality ingredients.
-            </p>
+          <div className="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+            <div>
+              <span className="badge bg-danger bg-opacity-10 text-danger rounded-pill px-3 py-1 fw-bold mb-2">
+                Popular in Benin City
+              </span>
+              <h2 className="fw-bold text-dark mb-0">Top Customer Favourites</h2>
+            </div>
 
-            {/* Category Filter Tabs */}
-            <div className="d-flex justify-content-center flex-wrap gap-2 mt-3">
+            {/* Category Filter Pills */}
+            <div className="d-flex gap-2 flex-wrap">
               <button
                 type="button"
-                className={`btn btn-sm rounded-pill px-3 py-2 border shadow-sm ${
+                className={`btn btn-sm rounded-pill px-3 py-2 border ${
                   selectedCategoryTab === "all" ? "btn-danger fw-bold" : "btn-white bg-white text-dark"
                 }`}
                 onClick={() => setSelectedCategoryTab("all")}
               >
                 ⭐ All
               </button>
-              {categories.slice(0, 7).map((cat) => (
+              {categories.slice(0, 6).map((cat) => (
                 <button
                   key={cat.id}
                   type="button"
-                  className={`btn btn-sm rounded-pill px-3 py-2 border shadow-sm ${
+                  className={`btn btn-sm rounded-pill px-3 py-2 border ${
                     selectedCategoryTab === cat.id ? "btn-danger fw-bold" : "btn-white bg-white text-dark"
                   }`}
                   onClick={() => setSelectedCategoryTab(cat.id)}
@@ -175,20 +259,23 @@ const HomePage = () => {
 
           <div className="text-center mt-5">
             <Link to="/shop" className="btn btn-glozzy-primary btn-lg px-5 shadow-sm">
-              View Full Menu ({products.length}+ Items) &rarr;
+              Explore Full Menu ({products.length}+ Items) &rarr;
             </Link>
           </div>
         </div>
       </section>
 
-      {/* 4. SPECIAL PROMO BANNER */}
+      {/* 4. PROMO BANNER */}
       <section className="py-4">
         <div className="container">
-          <div className="card bg-dark text-white rounded-4 overflow-hidden border-0 shadow-lg position-relative">
+          <div
+            className="card bg-dark text-white rounded-4 overflow-hidden shadow-lg position-relative border"
+            style={{ borderColor: "var(--g-accent)" }}
+          >
             <div className="row g-0 align-items-center">
               <div className="col-lg-7 p-4 p-md-5">
                 <span className="badge bg-warning text-dark fw-bold px-3 py-1 mb-3">
-                  🔥 Special Offer
+                  🔥 Special Discount
                 </span>
                 <h3 className="fw-bold text-white mb-2" style={{ fontSize: "28px" }}>
                   {cms?.promoBanner?.title || "Get 10% Discount on Orders Above ₦15,000!"}
@@ -198,10 +285,17 @@ const HomePage = () => {
                     "Use coupon code GLOZZY10 at checkout or mention it when ordering directly on WhatsApp."}
                 </p>
                 <div className="d-flex align-items-center gap-3 flex-wrap">
-                  <div className="bg-white text-danger fw-bold px-4 py-2 rounded-pill font-monospace fs-5">
+                  <div
+                    className="fw-bold px-4 py-2 rounded-pill font-monospace fs-5 border"
+                    style={{
+                      background: "var(--g-bg-elevated)",
+                      color: "var(--g-accent)",
+                      borderColor: "var(--g-accent)",
+                    }}
+                  >
                     CODE: {cms?.promoBanner?.code || "GLOZZY10"}
                   </div>
-                  <Link to="/shop" className="btn btn-glozzy-accent px-4 py-2">
+                  <Link to="/shop" className="btn btn-glozzy-primary px-4 py-2">
                     Order With Discount
                   </Link>
                 </div>
@@ -222,71 +316,71 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* 5. WHY CHOOSE GLOZZYFOODS (SERVICES) */}
+      {/* 5. VALUE PROPOSITION */}
       <section className="py-5 bg-white border-top">
         <div className="container">
-          <div className="text-center mb-4">
+          <div className="text-center mb-5">
             <span className="text-danger fw-bold small text-uppercase">Why GlozzyFoods</span>
-            <h3 className="fw-bold text-dark">The GlozzyFoods Standard</h3>
+            <h3 className="fw-bold text-dark mt-1">Food delivery made simple</h3>
           </div>
 
-          <div className="row g-3 text-center">
+          <div className="row g-4 text-center">
             <div className="col-md-3 col-sm-6">
-              <div className="p-4 rounded-4 bg-light h-100 border transition-all">
+              <div className="p-4 rounded-4 bg-light h-100 border">
                 <div
-                  className="rounded-circle bg-danger text-white d-inline-flex align-items-center justify-content-center mb-3"
-                  style={{ width: "52px", height: "52px", fontSize: "20px" }}
+                  className="rounded-circle bg-danger bg-opacity-10 text-danger d-inline-flex align-items-center justify-content-center mb-3 shadow-sm"
+                  style={{ width: "56px", height: "56px", fontSize: "22px" }}
                 >
                   <i className="fa-solid fa-kitchen-set"></i>
                 </div>
-                <h6 className="fw-bold text-dark">Fresh Handcrafted</h6>
+                <h6 className="fw-bold text-dark mb-2">Fresh Handcrafted</h6>
                 <p className="text-muted small mb-0">
-                  Every dish, cake, and pastry is prepared fresh with quality ingredients.
+                  Every dish, cake, and pastry is made fresh to order.
                 </p>
               </div>
             </div>
 
             <div className="col-md-3 col-sm-6">
-              <div className="p-4 rounded-4 bg-light h-100 border transition-all">
+              <div className="p-4 rounded-4 bg-light h-100 border">
                 <div
-                  className="rounded-circle bg-warning text-dark d-inline-flex align-items-center justify-content-center mb-3"
-                  style={{ width: "52px", height: "52px", fontSize: "20px" }}
+                  className="rounded-circle bg-danger bg-opacity-10 text-danger d-inline-flex align-items-center justify-content-center mb-3 shadow-sm"
+                  style={{ width: "56px", height: "56px", fontSize: "22px" }}
                 >
                   <i className="fa-solid fa-truck-fast"></i>
                 </div>
-                <h6 className="fw-bold text-dark">Swift Delivery</h6>
+                <h6 className="fw-bold text-dark mb-2">Swift Delivery</h6>
                 <p className="text-muted small mb-0">
-                  Speedy, well-packaged doorstep delivery across Benin City.
+                  Doorstep food delivery right across Benin City.
                 </p>
               </div>
             </div>
 
             <div className="col-md-3 col-sm-6">
-              <div className="p-4 rounded-4 bg-light h-100 border transition-all">
+              <div className="p-4 rounded-4 bg-light h-100 border">
                 <div
-                  className="rounded-circle bg-danger text-white d-inline-flex align-items-center justify-content-center mb-3"
-                  style={{ width: "52px", height: "52px", fontSize: "20px" }}
+                  className="rounded-circle bg-danger bg-opacity-10 text-danger d-inline-flex align-items-center justify-content-center mb-3 shadow-sm"
+                  style={{ width: "56px", height: "56px", fontSize: "22px" }}
                 >
                   <i className="fa-solid fa-cake-candles"></i>
                 </div>
-                <h6 className="fw-bold text-dark">Event Catering</h6>
+                <h6 className="fw-bold text-dark mb-2">Event Catering</h6>
                 <p className="text-muted small mb-0">
-                  Custom cakes and catering platters for birthdays, weddings, and events.
+                  Custom celebration cakes and party food platters.
                 </p>
               </div>
             </div>
 
             <div className="col-md-3 col-sm-6">
-              <div className="p-4 rounded-4 bg-light h-100 border transition-all">
+              <div className="p-4 rounded-4 bg-light h-100 border">
                 <div
-                  className="rounded-circle bg-success text-white d-inline-flex align-items-center justify-content-center mb-3"
-                  style={{ width: "52px", height: "52px", fontSize: "20px" }}
+                  className="rounded-circle bg-danger bg-opacity-10 text-danger d-inline-flex align-items-center justify-content-center mb-3 shadow-sm"
+                  style={{ width: "56px", height: "56px", fontSize: "22px" }}
                 >
                   <i className="fa-brands fa-whatsapp"></i>
                 </div>
-                <h6 className="fw-bold text-dark">WhatsApp Ordering</h6>
+                <h6 className="fw-bold text-dark mb-2">Instant WhatsApp Orders</h6>
                 <p className="text-muted small mb-0">
-                  Instant ordering and live order support directly via WhatsApp.
+                  Order and chat with our kitchen with one click.
                 </p>
               </div>
             </div>
@@ -297,14 +391,14 @@ const HomePage = () => {
       {/* 6. CATERING CTA BANNER */}
       <section className="py-5 bg-danger text-white text-center">
         <div className="container py-2">
-          <h3 className="fw-bold mb-2">
-            Planning an Event or Celebration?
+          <h3 className="fw-bold text-white mb-2">
+            Planning a Wedding, Birthday or Event?
           </h3>
           <p className="text-white-50 mx-auto mb-4" style={{ maxWidth: "550px", fontSize: "15px" }}>
             Let GlozzyFoods handle your catering! Multi-tier cakes, small chops platters, and authentic Nigerian food buffets.
           </p>
           <div className="d-flex justify-content-center gap-3 flex-wrap">
-            <Link to="/catering" className="btn btn-warning text-dark fw-bold btn-lg px-4 rounded-pill">
+            <Link to="/catering" className="btn btn-dark fw-bold btn-lg px-4 rounded-pill shadow-sm">
               <i className="fa-solid fa-calendar-check me-2"></i>
               Event Catering Details
             </Link>

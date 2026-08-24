@@ -68,7 +68,7 @@ const CartPage = () => {
           </ol>
         </nav>
 
-        <h2 className="fw-bold text-dark mb-4">Your Shopping Cart ({cart.length} items)</h2>
+        <h2 className="fw-bold text-white mb-4">Your Shopping Cart ({cart.length} items)</h2>
 
         <div className="row g-4">
           {/* CART ITEMS TABLE */}
@@ -76,9 +76,9 @@ const CartPage = () => {
             <div className="card border-0 shadow-sm rounded-4 p-4 bg-white mb-4">
               <div className="table-responsive">
                 <table className="table align-middle mb-0">
-                  <thead className="table-light">
+                  <thead>
                     <tr>
-                      <th style={{ minWidth: "220px" }}>Item & Delicacy</th>
+                      <th style={{ minWidth: "220px" }}>Item &amp; Delicacy</th>
                       <th className="text-center">Price</th>
                       <th className="text-center">Quantity</th>
                       <th className="text-end">Subtotal</th>
@@ -99,7 +99,7 @@ const CartPage = () => {
                             <div>
                               <Link
                                 to={`/product/${item.productSlug}`}
-                                className="fw-bold text-dark text-decoration-none hover-text-danger d-block"
+                                className="fw-bold text-white text-decoration-none hover-text-danger d-block"
                                 style={{ fontSize: "15px" }}
                               >
                                 {item.name}
@@ -115,7 +115,7 @@ const CartPage = () => {
                             </div>
                           </div>
                         </td>
-                        <td className="text-center fw-semibold text-dark">
+                        <td className="text-center fw-semibold text-white">
                           {formatNaira(item.price)}
                         </td>
                         <td className="text-center">
@@ -129,7 +129,7 @@ const CartPage = () => {
                             </button>
                             <input
                               type="text"
-                              className="form-control text-center fw-bold bg-white"
+                              className="form-control text-center fw-bold"
                               readOnly
                               value={item.quantity}
                             />
@@ -177,7 +177,7 @@ const CartPage = () => {
 
             {/* COUPON & PROMO CODE BOX */}
             <div className="card border-0 shadow-sm rounded-4 p-4 bg-white">
-              <h5 className="fw-bold text-dark mb-3">
+              <h5 className="fw-bold text-white mb-3">
                 <i className="fa-solid fa-ticket text-danger me-2"></i> Have a Discount Coupon?
               </h5>
               <form onSubmit={handleApplyCoupon} className="d-flex gap-2 mb-2" style={{ maxWidth: "450px" }}>
@@ -222,11 +222,11 @@ const CartPage = () => {
           {/* RIGHT SIDE: ORDER SUMMARY */}
           <div className="col-lg-4">
             <div className="card border-0 shadow-sm rounded-4 p-4 bg-white sticky-top" style={{ top: "90px" }}>
-              <h4 className="fw-bold text-dark mb-4">Order Summary</h4>
+              <h4 className="fw-bold text-white mb-4">Order Summary</h4>
 
               {/* Delivery Zone Estimator */}
               <div className="mb-4">
-                <label className="form-label small fw-bold text-dark mb-1">Estimate Delivery Zone</label>
+                <label className="form-label small fw-bold text-muted mb-1">Estimate Delivery Zone</label>
                 <select
                   className="form-select form-select-sm rounded-3"
                   value={selectedZoneId}
@@ -239,19 +239,19 @@ const CartPage = () => {
                   ))}
                 </select>
                 <small className="text-muted d-block mt-1">
-                  Estimated arrival: <strong>{selectedZone?.estimatedTime || "30 - 45 mins"}</strong>
+                  Estimated arrival: <strong className="text-white">{selectedZone?.estimatedTime || "30 - 45 mins"}</strong>
                 </small>
               </div>
 
               {/* Price Breakdown */}
               <div className="d-flex justify-content-between mb-2">
                 <span className="text-muted">Subtotal:</span>
-                <span className="fw-bold text-dark">{formatNaira(cartSubtotal)}</span>
+                <span className="fw-bold text-white">{formatNaira(cartSubtotal)}</span>
               </div>
 
               <div className="d-flex justify-content-between mb-2">
                 <span className="text-muted">Estimated Delivery:</span>
-                <span className="fw-bold text-dark">{formatNaira(estimatedDeliveryFee)}</span>
+                <span className="fw-bold text-white">{formatNaira(estimatedDeliveryFee)}</span>
               </div>
 
               {discountAmount > 0 && (
@@ -261,10 +261,10 @@ const CartPage = () => {
                 </div>
               )}
 
-              <hr className="my-3" />
+              <hr className="my-3 border-secondary" />
 
               <div className="d-flex justify-content-between align-items-center mb-4">
-                <span className="fs-5 fw-bold text-dark">Estimated Total:</span>
+                <span className="fs-5 fw-bold text-white">Estimated Total:</span>
                 <span className="fs-3 fw-bold text-danger">{formatNaira(estimatedGrandTotal)}</span>
               </div>
 
@@ -276,7 +276,7 @@ const CartPage = () => {
                 Proceed to Checkout <i className="fa-solid fa-arrow-right ms-2"></i>
               </button>
 
-              <div className="p-3 bg-light rounded-3 text-center small text-muted">
+              <div className="p-3 bg-light rounded-3 text-center small text-muted border">
                 <i className="fa-solid fa-lock text-success me-1"></i> Secure checkout with Paystack, Bank Transfer, or Cash on Delivery.
               </div>
             </div>
